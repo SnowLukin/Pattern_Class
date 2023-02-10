@@ -1,22 +1,20 @@
 #Создать класс Student в отдельном файле с полями объекта
 # ID, Фамилия, Имя, Отчество, Телефон, Телеграм, Почта,
-# Гит. ФИО – обязательно, остальные – нет. Написать
-# конструктор, написать геттер и сеттер для каждого поля,
-# при именовании методов ОБЯЗАТЕЛЬНО пользоваться
-# соглашениями о наименованиях в ruby.
+# Гит. ФИО – обязательно, остальные – нет.
 
 class Student
   attr_accessor :id, :surname, :name, :patronymic, :phone, :telegram, :email, :git
 
-  def initialize(id, surname, name, patronymic, phone, telegram, email, git)
-    @id = id
-    @surname = surname
-    @name = name
-    @patronymic = patronymic
-    @phone = phone
-    @telegram = telegram
-    @email = email
-    @git = git
+  # Init with any number of params
+  def initialize(params = {})
+    @id = params[:id]
+    @surname = params[:surname]
+    @name = params[:name]
+    @patronymic = params[:patronymic]
+    @phone = params[:phone]
+    @telegram = params[:telegram]
+    @email = params[:email]
+    @git = params[:git]
   end
 
   def to_s
@@ -24,26 +22,3 @@ class Student
   end
 
 end
-
-# Создать несколько объектов.
-student1 = Student.new(
-  1,
-  'Иванов', 'Иван', 'Иванович',
-  '+380000000000',
-  '@ivanov',
-  'ivanov@gmail.com',
-  'ivanovivan'
-)
-
-student2 = Student.new(
-  2,
-  'Петров', 'Петр', 'Петрович',
-  '+380000000001',
-  '@petrov',
-  'petrov@gmail.com',
-  'petrovpetr'
-)
-
-# вывести информацию о них на экран
-puts student1
-puts student2

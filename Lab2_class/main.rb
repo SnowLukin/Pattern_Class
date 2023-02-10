@@ -1,28 +1,24 @@
 require_relative 'Lab2'
 
-def main
-  # Create two students
-  student1 = Student.new(
-    1,
-    'Иванов', 'Иван', 'Иванович',
-    '+380000000000',
-    '@ivanov',
-    'ivanov@gmail.com',
-    'ivanovivan'
-  )
+def create_three_students
+  student1 = Student.new(surname: 'Andrewwww', first_name: 'Andrew', git: 'https://github.com/Andrew')
+  student2 = Student.new(surname: 'Boooob', first_name: 'Bob', phone: '1234567890', mail: 'Bob@gmail.com')
+  student3 = Student.new(surname: 'Steeeve', first_name: 'Steve', phone: '1234567890', mail: 'Steve@mail.ru', git: 'https://github.com/Steve')
+  [student1, student2, student3]
+end
 
-  student2 = Student.new(
-    2,
-    'Петров', 'Петр', 'Петрович',
-    '+380000000001',
-    '@petrov',
-    'petrov@gmail.com',
-    'petrovpetr'
-  )
+def print_students(students)
+  students.each do |student|
+    puts student
+  end
+end
+
+def main
+  # Create three students
+  student1, student2, student3 = create_three_students
 
   # Print their data
-  puts student1
-  puts student2
+  print_students([student1, student2, student3])
 end
 
 main
