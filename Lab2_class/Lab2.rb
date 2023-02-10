@@ -12,9 +12,26 @@ class Student
   # - .
   # - 1 or more characters
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
-  # Phone number 10 - 11 digits
-  VALID_PHONE_REGEX = /\A\d{10,11}\z/
+
+  # Phone number regex
+  # Phone number must be in the following format:
+  # - one plus sign
+  # - 10 digits
+  # - no spaces
+  # - no letters
+  # - no special characters
+  # - no dashes
+  # - no parentheses
+  # - no periods
+  VALID_PHONE_REGEX = /\A\+?\d{10}\z/
+
   # Git regex
+  # Git must be in the following format:
+  # - https://github.com
+  # - 1 or more characters
+  # - no spaces
+  # - no special characters
+  # - no dashes
   VALID_GIT_REGEX = /\Ahttps:\/\/github\.com\/\w+\z/
 
   # Init with any number of params
