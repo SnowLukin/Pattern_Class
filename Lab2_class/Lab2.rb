@@ -32,7 +32,9 @@ class Student
   # validate_contacts_presence, validate_git_presence: methods that check if at least one contact or git field is present, respectively.
   # validate: a method that validates that both the contacts and git fields are present.
   # set_contacts: a method that sets multiple contacts in one call.
-  
+  # from_string: a method that takes a string and creates a new Student object from it.
+  #
+
   # Create getters and setters for all instance variables
   attr_accessor :id, :surname, :name, :middle_name, :phone, :telegram, :email, :git
 
@@ -65,7 +67,7 @@ class Student
   # - no special characters
   # - no dashes
   VALID_GIT_REGEX = /\Ahttps:\/\/github\.com\/\w+\z/
-
+  
   # Init with any number of params
   def initialize(params = {})
     @id = params[:id]
@@ -102,6 +104,14 @@ class Student
   # Override to_s method
   def to_s
     "ID: #{@id}, Surname: #{@surname}, Name: #{@name}, Middle Name: #{@middle_name}, Phone: #{@phone}, Telegram: #{@telegram}, Email: #{@email}, Git: #{@git}"
+  end
+
+  # From string to Student object
+  def self.from_string(string)
+    # string = string.gsub(/\s+/, '') # remove whitespaces from string
+    id, surname, name, middle_name, phone, telegram, email, git = string.split(',')
+    params = { id: id, surname: surname, name: name, middle_name: middle_name, phone: phone, telegram: telegram, email: email, git: git }
+    new(params)
   end
 
   # Validate phone number
