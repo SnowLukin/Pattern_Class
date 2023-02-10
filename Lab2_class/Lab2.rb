@@ -79,4 +79,10 @@ class Student
     validate_git_presence && validate_contacts_presence
   end
 
+  def set_contacts(contacts = {})
+    @phone = contacts[:phone]
+    @telegram = contacts[:telegram]
+    @mail = contacts[:mail]
+  end
+
 end
