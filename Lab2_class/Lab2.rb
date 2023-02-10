@@ -1,8 +1,8 @@
-#Создать класс Student в отдельном файле с полями объекта
-# ID, Фамилия, Имя, Отчество, Телефон, Телеграм, Почта,
-# Гит. ФИО – обязательно, остальные – нет.
+# Class Student have the following fields:
+# ID, Surname, Name, Middle Name, Phone, Telegram, Email, Git.
+# Surname, Name, Middle Name are required, the rest are not.
 class Student
-  attr_accessor :id, :surname, :name, :patronymic, :phone, :telegram, :email, :git
+  attr_accessor :id, :surname, :name, :middle_name, :phone, :telegram, :email, :git
 
   # Email regex
   # Email address must be in the following format:
@@ -39,11 +39,14 @@ class Student
     @id = params[:id]
     @surname = params[:surname]
     @name = params[:name]
-    @patronymic = params[:patronymic]
+    @middle_name = params[:middle_name]
     @phone = params[:phone]
     @telegram = params[:telegram]
     @email = params[:email]
     @git = params[:git]
+
+    # name, surname and middle_name required
+    raise ArgumentError, "Name, surname and middle_name are required" unless @name && @surname && @middle_name
 
     # Validate phone number
     if @phone && !Student.valid_phone?(@phone)
@@ -64,42 +67,50 @@ class Student
     validate
   end
 
+  # Override to_s method
   def to_s
-    "ID: #{@id}, Surname: #{@surname}, Name: #{@name}, Middle Name: #{@patronymic}, Phone: #{@phone}, Telegram: #{@telegram}, Email: #{@email}, Git: #{@git}"
+    "ID: #{@id}, Surname: #{@surname}, Name: #{@name}, Middle Name: #{@middle_name}, Phone: #{@phone}, Telegram: #{@telegram}, Email: #{@email}, Git: #{@git}"
   end
 
+  # Validate phone number
   def self.valid_phone?(phone)
     phone =~ VALID_PHONE_REGEX
   end
 
+  # Validate email
   def self.valid_email?(email)
     email =~ VALID_EMAIL_REGEX
   end
 
+  # Validate git
   def self.valid_git?(git)
     git =~ VALID_GIT_REGEX
   end
 
+  # Validate that at least one contact is present
   def validate_contacts_presence
-    return true if phone || telegram || mail
+    return true if phone || telegram || email
     puts "At least one contact (phone, telegram, mail) is required"
     false
   end
 
+  # Validate that git is present
   def validate_git_presence
     return true if git
     puts "Git field is required"
     false
   end
 
+  # Validate that at least one contact is present and git is present
   def validate
     validate_git_presence && validate_contacts_presence
   end
 
+  # Set contacts
   def set_contacts(contacts = {})
     @phone = contacts[:phone]
     @telegram = contacts[:telegram]
-    @mail = contacts[:mail]
+    @email = contacts[:email]
   end
 
 end
