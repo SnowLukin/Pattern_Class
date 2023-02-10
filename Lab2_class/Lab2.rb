@@ -23,7 +23,6 @@ class Student
   # | + set_contacts(contacts: Hash)|
   # ---------------------
   # `id`: an integer that represents the ID of the student.
-  #
   # `surname`, `name`, `middle_name`: strings that represent the surname, name, and middle name of the student, respectively. These fields are required.
   # `phone`, `telegram`, `email`, `git`: strings that represent the phone number, telegram account, email, and git account of the student, respectively. These fields are optional.
   # initialize: the constructor method that takes a hash of parameters and creates a new Student object. It validates the required fields and raises an error if any of the required fields are missing. It also validates the phone number, email, and git fields using the valid_phone?, valid_email?, and valid_git? methods, respectively.
@@ -33,7 +32,10 @@ class Student
   # validate: a method that validates that both the contacts and git fields are present.
   # set_contacts: a method that sets multiple contacts in one call.
   # from_string: a method that takes a string and creates a new Student object from it.
-  #
+  # get_info: a method that returns short student's information.
+  # get_name_info: a method that returns student's surname, name and middle name in short way: Ivanov I.I..
+  # get_git_info: a method that returns student's git account.
+  # get_contact_info: a method that returns one of student's contacts.
 
   # Create getters and setters for all instance variables
   attr_accessor :id, :surname, :name, :middle_name, :phone, :telegram, :email, :git
@@ -157,6 +159,28 @@ class Student
     @phone = contacts[:phone]
     @telegram = contacts[:telegram]
     @email = contacts[:email]
+  end
+
+  # Short info about student
+  def get_info
+    "#{get_name_info} #{get_git_info}, #{get_contact_info}"
+  end
+
+  # Name info: Ivanov I.I.
+  def get_name_info
+    "#{@surname} #{@name[0]}.#{@middle_name[0]}."
+  end
+
+  # Git info
+  def get_git_info
+    "Git: #{@git}"
+  end
+
+  # Contact info (phone, telegram or email)
+  def get_contact_info
+    return "Phone: #{@phone}" if @phone
+    return "Telegram: #{@telegram}" if @telegram
+    "Email: #{@email}" if @email
   end
 end
 
