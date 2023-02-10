@@ -67,7 +67,7 @@ class Student
   # - no special characters
   # - no dashes
   VALID_GIT_REGEX = /\Ahttps:\/\/github\.com\/\w+\z/
-  
+
   # Init with any number of params
   def initialize(params = {})
     @id = params[:id]
@@ -108,6 +108,10 @@ class Student
 
   # From string to Student object
   def self.from_string(string)
+
+    # Error if the string doesnt have at least 3 elements
+    raise ArgumentError, "Wrong number of arguments" unless string.split(',').length >= 3
+
     # string = string.gsub(/\s+/, '') # remove whitespaces from string
     id, surname, name, middle_name, phone, telegram, email, git = string.split(',')
     params = { id: id, surname: surname, name: name, middle_name: middle_name, phone: phone, telegram: telegram, email: email, git: git }
