@@ -1,4 +1,4 @@
-require_relative 'Lab2'
+require_relative 'Student'
 
 def create_four_students
   student1 = Student.new(surname:'Andreeew', name:'Andrew', middle_name:'dsf', git: 'https://github.com/Andrew')
