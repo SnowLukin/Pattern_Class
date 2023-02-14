@@ -142,3 +142,67 @@ def main(method, file)
 end
 
 # main('min_while', 'input.txt')
+
+
+# Задание 4
+
+# Задача 8
+# Дан целочисленный массив. Необходимо найти индексы двух
+# наименьших элементов массива.
+def find_min_index(arr)
+  min = arr[0]
+  min_index = 0
+  arr.each_with_index do |i, index|
+    if i < min
+      min = i
+      min_index = index
+    end
+  end
+  min_index
+end
+
+# Задача 20
+# Дан целочисленный массив. Необходимо найти все пропущенные числа.
+def find_missing(arr)
+  arr.sort!
+  missing = []
+  (arr[0]..arr[-1]).each do |i|
+    missing.push(i) unless arr.include?(i)
+  end
+  missing
+end
+
+# Задача 32
+# Дан целочисленный массив. Найти количество его локальных максимумов.
+def find_local_max(arr)
+  count = 0
+  (1..arr.length - 2).each do |i|
+    count += 1 if arr[i - 1] < arr[i] && arr[i] > arr[i + 1]
+  end
+  count
+end
+
+# Задача 44
+# Дан массив чисел. Необходимо проверить, чередуются ли в нем
+# целые и вещественные числа.
+def check_alternate(arr)
+  arr.each_with_index do |i, index|
+    if index.odd?
+      return false if i.is_a?(Integer)
+    else
+      return false if i.is_a?(Float)
+    end
+  end
+  true
+end
+
+# Задача 56
+# Для введенного списка посчитать среднее арифметическое непростых
+# элементов, которые больше, чем среднее арифметическое простых.
+def is_prime(num)
+  return false if num < 2
+  (2..Math.sqrt(num)).each do |i|
+    return false if (num % i).zero?
+  end
+  true
+end
