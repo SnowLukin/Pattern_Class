@@ -99,3 +99,46 @@ def first_positive(arr)
   end
   -1
 end
+
+# Задача 2
+
+# 2 Написать программу, которая принимает как аргумент два
+# значения. Первое значение говорит, какой из методов задачи
+# 1 выполнить, второй говорит о том, откуда читать список
+# аргументом должен быть написан адрес файла. Далее
+# необходимо прочитать массив и выполнить метод.
+
+def read_file(file)
+  file = File.open(file)
+  arr = file.readlines
+  file.close
+  arr.map! { |i| i.to_i }
+end
+
+def write_file(file, arr)
+  file = File.open(file, 'w')
+  file.write(arr)
+  file.close
+end
+
+def main(method, file)
+  arr = read_file(file)
+  case method
+  when 'min_while'
+    write_file(file, min_while(arr))
+  when 'min_for'
+    write_file(file, min_for(arr))
+  when 'min'
+    write_file(file, min(arr))
+  when 'first_positive_while'
+    write_file(file, first_positive_while(arr))
+  when 'first_positive_for'
+    write_file(file, first_positive_for(arr))
+  when 'first_positive'
+    write_file(file, first_positive(arr))
+  else
+    puts 'Неверный метод'
+  end
+end
+
+# main('min_while', 'input.txt')
