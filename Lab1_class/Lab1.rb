@@ -13,3 +13,15 @@ def find_coprimes(num)
   end
   count
 end
+
+# Найти сумму цифр числа, делящихся на 3
+def sum_of_digits(num)
+  sum = 0
+  while num.positive?
+    sum += num % 10 if (num % 10) % 3 == 0
+    num /= 10
+  end
+  sum
+end
+
+
