@@ -35,3 +35,9 @@ cmd_ruby = #{STDIN.gets.chomp}
   # puts cmd_ruby
   # cmd_ruby= ruby -e "#{STDIN.gets.chomp}"
   system "ruby -e \"#{cmd_ruby}\""
+
+
+puts "number of arguments: #{ARGV.count}"
+ARGV.each do |arg|
+  puts "argument: #{arg}"
+end
