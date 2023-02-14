@@ -24,4 +24,19 @@ def sum_of_digits(num)
   sum
 end
 
+# Найти делитель числа, являющийся взаимно простым с наибольшим количеством цифр данного числа.
+def find_divisor(num)
+  max = 0
+  divisor = 0
+  (1..num).each do |i|
+    next unless (num % i).zero?
 
+    if gcd(num, i) == 1
+      if i.to_s.length > max
+        max = i.to_s.length
+        divisor = i
+      end
+    end
+  end
+  divisor
+end
