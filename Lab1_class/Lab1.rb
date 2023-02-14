@@ -74,3 +74,28 @@ def min(arr)
   end
   min
 end
+
+# Номер первого положительного элемента через while
+
+def first_positive_while(arr)
+  i = 0
+  while i < arr.length
+    return i if arr[i].positive?
+    i += 1
+  end
+  -1
+end
+
+def first_positive_for(arr)
+  for i in arr
+    return arr.index(i) if i.positive?
+  end
+  -1
+end
+
+def first_positive(arr)
+  arr.each_with_index do |i, index|
+    return index if i.positive?
+  end
+  -1
+end
