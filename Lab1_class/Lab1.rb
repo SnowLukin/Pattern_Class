@@ -58,3 +58,19 @@ def min_while(arr)
   end
   min
 end
+
+def min_for(arr)
+  min = arr[0]
+  for i in arr
+    min = i if i < min
+  end
+  min
+end
+
+def min(arr)
+  min = arr[0]
+  arr.each do |i|
+    min = i if i < min
+  end
+  min
+end
