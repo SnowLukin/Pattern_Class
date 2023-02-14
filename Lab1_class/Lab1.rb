@@ -40,3 +40,21 @@ def find_divisor(num)
   end
   divisor
 end
+
+puts find_coprimes(10)
+puts sum_of_digits(123)
+puts find_divisor(10)
+
+# Задание 2
+
+# Задача 1
+# Найти минимальный элемент массива
+def min_while(arr)
+  min = arr[0]
+  i = 0
+  while i < arr.length
+    min = arr[i] if arr[i] < min
+    i += 1
+  end
+  min
+end
