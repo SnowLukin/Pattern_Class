@@ -12,7 +12,8 @@
 # ---------------------
 # | + initialize(params: Hash)   |
 # | + to_s: String                |
-# | + read_from_txt(filePath: String |
+# | + read_from_txt(filePath: String) |
+# | + write_to_txt(file_path: String, students: [Student]) |
 # | + valid_phone?(phone: String)|
 # | + valid_email?(email: String)|
 # | + valid_git?(git: String)    |
@@ -138,6 +139,23 @@ class Student < Student_super
             students
             rescue => exception
             raise "File not found at the given address #{file_path}. Exception: #{exception.message}"
+        end
+    end
+    
+    # Writes student data to a text file.
+    #
+    # @param file_path [String] the path to the text file to be written
+    # @param students [Array<Student>] an array of Student objects whose data will be written to the file
+    # @raise [RuntimeError] if there is an error while writing to the file
+    def self.write_to_txt(file_path, students)
+        begin
+            File.open(file_path, 'w') do |file|
+                students.each do |student|
+                    file.puts "#{student.id},#{student.surname},#{student.name},#{student.middle_name},#{student.phone},#{student.telegram},#{student.email},#{student.git}"
+                end
+            end
+            rescue => exception
+            raise "File could not be written at the given address #{file_path}. Exception: #{exception.message}"
         end
     end
     
