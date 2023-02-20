@@ -1,3 +1,15 @@
+#    ____________________________________________
+#    |     DataTable                             |
+#    |___________________________________________|
+#    | - data : Array                            |
+#    |___________________________________________|
+#    | + initialize(data: Array)                 |
+#    | + [](row: Integer, col: Integer) : Object |
+#    | + row_count() : Integer                   |
+#    | + column_count() : Integer                |
+#    |___________________________________________|
+
+
 # Represents a two-dimensional table of data.
 class DataTable
     # Creates a new DataTable object.
