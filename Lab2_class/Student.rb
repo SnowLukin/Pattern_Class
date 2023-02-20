@@ -1,44 +1,45 @@
+# ---------------------
+# |    Student        |
+# ---------------------
+# | - id: Integer     |
+# | - surname: String |
+# | - name: String    |
+# | - middle_name: String |
+# | - phone: String   |
+# | - telegram: String|
+# | - email: String   |
+# | - git: String     |
+# ---------------------
+# | + initialize(params: Hash)   |
+# | + to_s: String                |
+# | + valid_phone?(phone: String)|
+# | + valid_email?(email: String)|
+# | + valid_git?(git: String)    |
+# | + validate_contacts_presence |
+# | + validate_git_presence      |
+# | + validate                   |
+# | + set_contacts(contacts: Hash)|
+# ---------------------
+# `id`: an integer that represents the ID of the student.
+# `surname`, `name`, `middle_name`: strings that represent the surname, name, and middle name of the student, respectively. These fields are required.
+# `phone`, `telegram`, `email`, `git`: strings that represent the phone number, telegram account, email, and git account of the student, respectively. These fields are optional.
+# initialize: the constructor method that takes a hash of parameters and creates a new Student object. It validates the required fields and raises an error if any of the required fields are missing. It also validates the phone number, email, and git fields using the valid_phone?, valid_email?, and valid_git? methods, respectively.
+# to_s: a method that returns a string representation of the student object in a human-readable format.
+# valid_phone?, valid_email?, valid_git?: methods that validate the phone number, email, and git fields using regular expressions, respectively.
+# validate_contacts_presence, validate_git_presence: methods that check if at least one contact or git field is present, respectively.
+# validate: a method that validates that both the contacts and git fields are present.
+# set_contacts: a method that sets multiple contacts in one call.
+# from_string: a method that takes a string and creates a new Student object from it.
+# get_info: a method that returns short student's information.
+# get_name_info: a method that returns student's surname, name and middle name in short way: Ivanov I.I..
+# get_git_info: a method that returns student's git account.
+# get_contact_info: a method that returns one of student's contacts.
 
-class Student
-  # ---------------------
-  # |    Student        |
-  # ---------------------
-  # | - id: Integer     |
-  # | - surname: String |
-  # | - name: String    |
-  # | - middle_name: String |
-  # | - phone: String   |
-  # | - telegram: String|
-  # | - email: String   |
-  # | - git: String     |
-  # ---------------------
-  # | + initialize(params: Hash)   |
-  # | + to_s: String                |
-  # | + valid_phone?(phone: String)|
-  # | + valid_email?(email: String)|
-  # | + valid_git?(git: String)    |
-  # | + validate_contacts_presence |
-  # | + validate_git_presence      |
-  # | + validate                   |
-  # | + set_contacts(contacts: Hash)|
-  # ---------------------
-  # `id`: an integer that represents the ID of the student.
-  # `surname`, `name`, `middle_name`: strings that represent the surname, name, and middle name of the student, respectively. These fields are required.
-  # `phone`, `telegram`, `email`, `git`: strings that represent the phone number, telegram account, email, and git account of the student, respectively. These fields are optional.
-  # initialize: the constructor method that takes a hash of parameters and creates a new Student object. It validates the required fields and raises an error if any of the required fields are missing. It also validates the phone number, email, and git fields using the valid_phone?, valid_email?, and valid_git? methods, respectively.
-  # to_s: a method that returns a string representation of the student object in a human-readable format.
-  # valid_phone?, valid_email?, valid_git?: methods that validate the phone number, email, and git fields using regular expressions, respectively.
-  # validate_contacts_presence, validate_git_presence: methods that check if at least one contact or git field is present, respectively.
-  # validate: a method that validates that both the contacts and git fields are present.
-  # set_contacts: a method that sets multiple contacts in one call.
-  # from_string: a method that takes a string and creates a new Student object from it.
-  # get_info: a method that returns short student's information.
-  # get_name_info: a method that returns student's surname, name and middle name in short way: Ivanov I.I..
-  # get_git_info: a method that returns student's git account.
-  # get_contact_info: a method that returns one of student's contacts.
+require_relative 'Student_super'
 
+class Student < Student_super
   # Create getters and setters for all instance variables
-  attr_accessor :id, :surname, :name, :middle_name, :phone, :telegram, :email, :git
+  attr_accessor :name, :middle_name, :phone, :telegram, :email
 
   # Email regex
   # Email address must be in the following format:
@@ -72,14 +73,12 @@ class Student
 
   # Init with any number of params
   def initialize(params = {})
-    @id = params[:id]
-    @surname = params[:surname]
+    super.initialize(params[:id], params[:surname], params[:git])
     @name = params[:name]
     @middle_name = params[:middle_name]
     @phone = params[:phone]
     @telegram = params[:telegram]
     @email = params[:email]
-    @git = params[:git]
 
     # name, surname and middle_name required
     raise ArgumentError, "Name, surname and middle_name are required" unless @name && @surname && @middle_name

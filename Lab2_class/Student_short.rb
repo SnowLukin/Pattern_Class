@@ -1,24 +1,11 @@
-require_relative 'Student'
+require_relative 'Student_super'
 
-class Student_short
-  attr_reader :id, :surname, :git, :contact
+class Student_short < Student_super
+  attr_reader :contact
 
-  def initialize(student)
-    @id = student.id
-    @surname = student.surname + student.name[0] + student.middle_name[0]
-    @git = student.git
-    @contact = student.get_contact_info
-  end
-
-  def self.from_string(id, string)
-    surname, git, contact = string.split(',')
-    params = { id: id, surname: surname, git: git, contact: contact }
-    new(params)
-  end
-
-  def self.from_student(student)
-    params = { id: student.id, surname: student.surname, git: student.git, contact: student.contact }
-    new(params)
+  def initialize(id, surname, git, contact)
+    super.initialize(id, surname, git)
+    @contact = contact
   end
 
   def to_s
