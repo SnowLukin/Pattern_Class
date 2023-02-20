@@ -130,10 +130,9 @@ class Student < Student_super
         begin
             File.open(file_path, 'r') do |file|
                 file.each_line do |line|
-                    id, surname, first_name, patronymic, phone, telegram, mail, git = line.split(',')
-                    params_to = { id: id, surname: surname, first_name: first_name, patronymic: patronymic, phone: phone, telegram: telegram, mail: mail, git: git }
+                    id, surname, name, middle_name, phone, telegram, email, git = line.split(',')
+                    params_to = { id: id, surname: surname, name: name, middle_name: middle_name, phone: phone, telegram: telegram, email: email, git: git }
                     Student.new(params_to) << students
-                    
                 end
             end
             students
