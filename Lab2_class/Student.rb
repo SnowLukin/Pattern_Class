@@ -198,6 +198,7 @@ class Student < Student_super
         @phone = contacts[:phone]
         @telegram = contacts[:telegram]
         @email = contacts[:email]
+        validate
     end
     
     # Short info about student
