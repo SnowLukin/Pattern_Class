@@ -1,27 +1,27 @@
-#+----------------------------------------+
-#|              Student_super              |
-#+----------------------------------------+
-#| - id: string                            |
-#| - surname: string                       |
-#| - git: string                           |
-#+----------------------------------------+
-#| + initialize(id: string, surname: string, git: string) |
-#| + to_s(): string                        |
-#| + id(): string                          |
-#| + surname(): string                     |
-#| + git(): string                         |
-#+----------------------------------------+
+#    _______________________________________________________
+#    |                 Student_super                         |
+#    |-------------------------------------------------------|
+#    | #id: String                                           |
+#    | #surname: String                                      |
+#    | #git: String                                          |
+#    |-------------------------------------------------------|
+#    | + initialize(id: String, surname: String, git: String)|
+#    | + to_s(): String                                      |
+#    |-------------------------------------------------------|
+#    | - validate_git()                                      |
+#    | - validate_git_presence()                             |
+#    | + self.is_valid_git?(git: String): Boolean            |
+#    |_______________________________________________________|
 
-# Class: Student_super
-#
+
 # This class represents a student with an ID, surname, and git username.
 class Student_super
     # A string representing the student ID.
-    attr_reader :id
+    attr_accessor :id
     # A string representing the student's surname.
-    attr_reader :surname
+    attr_accessor :surname
     # A string representing the student's git username.
-    attr_reader :git
+    attr_accessor :git
     
     def initialize(id, surname, git)
         @id = id

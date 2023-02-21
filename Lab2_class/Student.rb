@@ -1,44 +1,50 @@
-# ---------------------
-# |    Student        |
-# ---------------------
-# | - id: Integer     |
-# | - surname: String |
-# | - name: String    |
-# | - middle_name: String |
-# | - phone: String   |
-# | - telegram: String|
-# | - email: String   |
-# | - git: String     |
-# ---------------------
-# | + initialize(params: Hash)   |
-# | + to_s: String                |
-# | + read_from_txt(filePath: String) |
-# | + write_to_txt(file_path: String, students: [Student]) |
-# | + valid_phone?(phone: String)|
-# | + valid_email?(email: String)|
-# | + valid_git?(git: String)    |
-# | + validate_contacts_presence |
-# | + validate_git_presence      |
-# | + validate                   |
-# | + set_contacts(contacts: Hash)|
-# ---------------------
+#    +---------------------------------+
+#    |            Student              |
+#    +---------------------------------+
+#    | -id: int                        |
+#    | -surname: string                |
+#    | -name: string                   |
+#    | -middle_name: string            |
+#    | -phone: string                  |
+#    | -telegram: string               |
+#    | -email: string                  |
+#    | -git: string                    |
+#    | +VALID_EMAIL_REGEX: regex       |
+#    | +VALID_PHONE_REGEX: regex       |
+#    | +VALID_GIT_REGEX: regex         |
+#    +---------------------------------+
+#    | +new(params)                    |
+#    | +from_string(string): Student   |
+#    | +read_from_txt(file_path): Array|
+#    | +write_to_txt(file_path, students)|
+#    | +set_contacts(phone, telegram, email)|
+#    | +get_info: string               |
+#    | +get_name_info: string          |
+#    | +get_contact_info: string       |
+#    +---------------------------------+
 
-# TODO: - Changes needed
 
-# `id`: an integer that represents the ID of the student.
-# `surname`, `name`, `middle_name`: strings that represent the surname, name, and middle name of the student, respectively. These fields are required.
-# `phone`, `telegram`, `email`, `git`: strings that represent the phone number, telegram account, email, and git account of the student, respectively. These fields are optional.
-# initialize: the constructor method that takes a hash of parameters and creates a new Student object. It validates the required fields and raises an error if any of the required fields are missing. It also validates the phone number, email, and git fields using the valid_phone?, valid_email?, and valid_git? methods, respectively.
-# to_s: a method that returns a string representation of the student object in a human-readable format.
-# valid_phone?, valid_email?, valid_git?: methods that validate the phone number, email, and git fields using regular expressions, respectively.
-# validate_contacts_presence, validate_git_presence: methods that check if at least one contact or git field is present, respectively.
-# validate: a method that validates that both the contacts and git fields are present.
-# set_contacts: a method that sets multiple contacts in one call.
-# from_string: a method that takes a string and creates a new Student object from it.
-# get_info: a method that returns short student's information.
-# get_name_info: a method that returns student's surname, name and middle name in short way: Ivanov I.I..
-# get_git_info: a method that returns student's git account.
-# get_contact_info: a method that returns one of student's contacts.
+#    The Student class has the following attributes:
+#
+#    * id: an integer that represents the unique identifier of the student
+#    * surname: a string that represents the surname of the student
+#    * name: a string that represents the name of the student
+#    * middle_name: a string that represents the middle name of the student
+#    * phone: a string that represents the phone number of the student
+#    * telegram: a string that represents the Telegram account of the student
+#    * email: a string that represents the email address of the student
+#    * git: a string that represents the Git account of the student
+
+#    The Student class has the following methods:
+#
+#    * new(params): a constructor that initializes a new Student object with the given parameters.
+#    * from_string(string): a static method that creates a new Student object from a string.
+#    * read_from_txt(file_path): a static method that reads student data from a text file and returns an array of Student objects.
+#    * write_to_txt(file_path, students): a static method that writes student data to a text file.
+#    * set_contacts(phone, telegram, email): a method that sets the phone, telegram, and email attributes of the Student object.
+#    * get_info(): a method that returns a short string containing the name, Git account, and contact information of the Student object.
+#    * get_name_info(): a method that returns a short string containing the surname, name initial, and middle name initial of the Student object.
+#    * get_contact_info(): a method that returns a short string containing the phone, telegram, or email of the Student object.
 
 require_relative 'Student_super'
 
