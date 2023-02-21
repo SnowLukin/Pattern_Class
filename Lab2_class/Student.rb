@@ -22,6 +22,9 @@
 # | + validate                   |
 # | + set_contacts(contacts: Hash)|
 # ---------------------
+
+# TODO: - Changes needed
+
 # `id`: an integer that represents the ID of the student.
 # `surname`, `name`, `middle_name`: strings that represent the surname, name, and middle name of the student, respectively. These fields are required.
 # `phone`, `telegram`, `email`, `git`: strings that represent the phone number, telegram account, email, and git account of the student, respectively. These fields are optional.
@@ -75,9 +78,11 @@ class Student < Student_super
     
     # Init with any number of params
     def initialize(params = {})
-        super.initialize(params[:id], params[:surname], params[:git])
+        super.initialize(id: params[:id], surname: params[:surname], git: params[:git])
         @name = params[:name]
         @middle_name = params[:middle_name]
+        
+        set_contacts(params[:phone], params[:telegram], params[:email])
         
         # name, surname and middle_name are required
         raise ArgumentError, "Name, surname and middle_name are required" unless @name && @surname && @middle_name
@@ -86,8 +91,6 @@ class Student < Student_super
         if !validate
             raise ArgumentError, "Git and at least one contact is req..."
         end
-        
-        set_contacts(params[:phone], params[:telegram], params[:email])
     end
     
     # Override to_s method
@@ -187,11 +190,7 @@ class Student < Student_super
         email =~ VALID_EMAIL_REGEX
     end
     
-    # Validate git
-    def self.is_valid_git?(git)
-        git =~ VALID_GIT_REGEX
-    end
-    
+    # MARK: - PRIVATE
     private
     # Validate that at least one contact is present and git is present
     def validate
@@ -202,13 +201,6 @@ class Student < Student_super
     def validate_contacts_presence
         return true if phone || telegram || email
         puts "At least one contact (phone, telegram, mail) is required"
-        false
-    end
-    
-    # Validate that git is present
-    def validate_git_presence
-        return true if git
-        puts "Git field is required"
         false
     end
     

@@ -16,39 +16,38 @@
 #
 # This class represents a student with an ID, surname, and git username.
 class Student_super
-  # Attribute: id
-  #
-  # A string representing the student ID.
-  attr_reader :id
-
-  # Attribute: surname
-  #
-  # A string representing the student's surname.
-  attr_reader :surname
-
-  # Attribute: git
-  #
-  # A string representing the student's git username.
-  attr_reader :git
-
-  # Method: initialize
-  #
-  # Initializes the id, surname, and git attributes with the given values.
-  #
-  # Parameters:
-  # id - The student ID.
-  # surname - The student's surname.
-  # git - The student's git username.
-  def initialize(id, surname, git)
-    @id = id
-    @surname = surname
-    @git = git
-  end
-
-  # Method: to_s
-  #
-  # Returns a string representation of the student in the format "ID: [id], Surname: [surname], Git: [git]".
-  def to_s
-    "ID: #{@id}, Surname: #{@surname}, Git: #{@git}"
-  end
+    # A string representing the student ID.
+    attr_reader :id
+    # A string representing the student's surname.
+    attr_reader :surname
+    # A string representing the student's git username.
+    attr_reader :git
+    
+    def initialize(id, surname, git)
+        @id = id
+        @surname = surname
+        @git = git
+    end
+    
+    # In case the private init is needed
+    # private_class_method :new
+    
+    
+    # Returns a string representation of the student in the format "ID: [id], Surname: [surname], Git: [git]".
+    def to_s
+        "ID: #{@id}, Surname: #{@surname}, Git: #{@git}"
+    end
+    
+    # Validate git
+    def self.is_valid_git?(git)
+        git =~ VALID_GIT_REGEX
+    end
+    
+    private
+    # Validate that git is present
+    def validate_git_presence
+        return true if git
+        puts "Git field is required"
+        false
+    end
 end
