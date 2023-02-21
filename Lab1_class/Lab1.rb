@@ -40,9 +40,9 @@ def find_divisor(num)
   divisor
 end
 
-puts find_coprimes(10)
-puts sum_of_digits(123)
-puts find_divisor(10)
+#puts find_coprimes(10)
+#puts sum_of_digits(123)
+#puts find_divisor(10)
 
 # Задание 2
 
@@ -157,6 +157,7 @@ def find_min_index(arr)
       min_index = index
     end
   end
+#  puts min_index
   min_index
 end
 
@@ -168,6 +169,7 @@ def find_missing(arr)
   (arr[0]..arr[-1]).each do |i|
     missing.push(i) unless arr.include?(i)
   end
+#  puts missing
   missing
 end
 
@@ -205,3 +207,27 @@ def is_prime(num)
   end
   true
 end
+
+#require "./st1.rb"
+
+if ARGV.length != 2
+    puts "Usage: ruby Lab1.rb <number of method> <file>"
+    exit
+end
+
+array = File.read(ARGV[1]).split.map(&:to_i)
+
+puts (
+      case ARGV[0].to_i
+      when 1
+        find_min_index(array)
+      when 2
+        find_missing(array)
+      when 3
+        find_local_max(array)
+      when 4
+        check_alternate(array)
+      when 5
+        first_positive(array)
+      end
+)
