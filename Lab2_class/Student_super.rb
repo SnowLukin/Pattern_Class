@@ -44,6 +44,14 @@ class Student_super
     end
     
     private
+    
+    # Validate git
+    def validate_git
+        if @git && !Student.is_valid_git?(@git)
+            raise ArgumentError, "Git in wrong format."
+        end
+    end
+    
     # Validate that git is present
     def validate_git_presence
         return true if git

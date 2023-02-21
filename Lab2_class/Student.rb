@@ -100,13 +100,18 @@ class Student < Student_super
     
     # From string to Student object
     def self.from_string(string)
-        
-        # Error if the string doesnt have at least 3 elements
-        raise ArgumentError, "Wrong number of arguments" unless string.split(',').length >= 3
-        
         # string = string.gsub(/\s+/, '') # remove whitespaces from string
         id, surname, name, middle_name, phone, telegram, email, git = string.split(',')
-        params = { id: id, surname: surname, name: name, middle_name: middle_name, phone: phone, telegram: telegram, email: email, git: git }
+        params = {
+            id: id,
+            surname: surname,
+            name: name,
+            middle_name: middle_name,
+            phone: phone,
+            telegram: telegram,
+            email: email,
+            git: git
+        }
         new(params)
     end
     
@@ -202,13 +207,6 @@ class Student < Student_super
         return true if phone || telegram || email
         puts "At least one contact (phone, telegram, mail) is required"
         false
-    end
-    
-    # Validate git
-    def validate_git
-        if @git && !Student.is_valid_git?(@git)
-            raise ArgumentError, "Git in wrong format."
-        end
     end
 end
 
