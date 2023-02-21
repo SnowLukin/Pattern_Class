@@ -78,30 +78,16 @@ class Student < Student_super
         super.initialize(params[:id], params[:surname], params[:git])
         @name = params[:name]
         @middle_name = params[:middle_name]
-        @phone = params[:phone]
-        @telegram = params[:telegram]
-        @email = params[:email]
         
-        # name, surname and middle_name required
+        # name, surname and middle_name are required
         raise ArgumentError, "Name, surname and middle_name are required" unless @name && @surname && @middle_name
         
-        # Validate phone number
-        if @phone && !Student.valid_phone?(@phone)
-            raise ArgumentError, "Phone in wrong format."
-        end
-        
-        # Validate email
-        if @email && !Student.valid_email?(@email)
-            raise ArgumentError, "Email in wrong format."
-        end
-        
-        # Validate git
-        if @git && !Student.valid_git?(@git)
-            raise ArgumentError, "Git in wrong format."
-        end
-        
         # Validate that at least one contact is present and git is present
-        validate
+        if !validate
+            raise ArgumentError, "Git and at least one contact is req..."
+        end
+        
+        set_contacts(params[:phone], params[:telegram], params[:email])
     end
     
     # Override to_s method
@@ -159,19 +145,57 @@ class Student < Student_super
         end
     end
     
+    # Set contacts
+    def set_contacts(phone, telegram, email)
+        if phone && !Student.is_valid_phone?(phone)
+            raise ArgumentError, "Phone in wrong format."
+        end
+        
+        if email && !Student.is_valid_email?(email)
+            raise ArgumentError, "Email in wrong format."
+        end
+        
+        @phone = phone
+        @telegram = telegram
+        @email = email
+    end
+    
+    # Short info about student
+    def get_info
+        "#{get_name_info}, Git: #{@git}, #{get_contact_info}"
+    end
+    
+    # Name info: Ivanov I.I.
+    def get_name_info
+        "#{@surname} #{@name[0]}.#{@middle_name[0]}."
+    end
+    
+    # Contact info (phone, telegram or email)
+    def get_contact_info
+        return "Phone: #{@phone}" if @phone
+        return "Telegram: #{@telegram}" if @telegram
+        "Email: #{@email}" if @email
+    end
+    
     # Validate phone number
-    def self.valid_phone?(phone)
+    def self.is_valid_phone?(phone)
         phone =~ VALID_PHONE_REGEX
     end
     
     # Validate email
-    def self.valid_email?(email)
+    def self.is_valid_email?(email)
         email =~ VALID_EMAIL_REGEX
     end
     
     # Validate git
-    def self.valid_git?(git)
+    def self.is_valid_git?(git)
         git =~ VALID_GIT_REGEX
+    end
+    
+    private
+    # Validate that at least one contact is present and git is present
+    def validate
+        validate_git_presence && validate_contacts_presence
     end
     
     # Validate that at least one contact is present
@@ -188,39 +212,11 @@ class Student < Student_super
         false
     end
     
-    # Validate that at least one contact is present and git is present
-    def validate
-        validate_git_presence && validate_contacts_presence
-    end
-    
-    # Set contacts
-    def set_contacts(contacts = {})
-        @phone = contacts[:phone]
-        @telegram = contacts[:telegram]
-        @email = contacts[:email]
-        validate
-    end
-    
-    # Short info about student
-    def get_info
-        "#{get_name_info} #{get_git_info}, #{get_contact_info}"
-    end
-    
-    # Name info: Ivanov I.I.
-    def get_name_info
-        "#{@surname} #{@name[0]}.#{@middle_name[0]}."
-    end
-    
-    # Git info
-    def get_git_info
-        "Git: #{@git}"
-    end
-    
-    # Contact info (phone, telegram or email)
-    def get_contact_info
-        return "Phone: #{@phone}" if @phone
-        return "Telegram: #{@telegram}" if @telegram
-        "Email: #{@email}" if @email
+    # Validate git
+    def validate_git
+        if @git && !Student.is_valid_git?(@git)
+            raise ArgumentError, "Git in wrong format."
+        end
     end
 end
 
