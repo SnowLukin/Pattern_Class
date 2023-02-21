@@ -1,4 +1,7 @@
 class Data_list
+    
+    attr_reader :selected
+    
     def initialize(data)
         @data = data
         @selected = []
@@ -16,6 +19,22 @@ class Data_list
         @data.each { |element| yield element }
     end
     
+    def select(number)
+        @selected << number
+    end
+    
+    def get_selected
+        @selected
+    end
+    
+    def get_names
+        raise NotImplementedError, "get_names must be implemented in inheriting class"
+    end
+    
+    def get_data
+        raise NotImplementedError, "get_data must be implemented in inheriting class"
+    end
+    
     private
-      attr_reader :data
+    attr_reader :data
 end
