@@ -17,13 +17,16 @@
 # This class represents a student with an ID, surname, and git username.
 class Student_super
     # A string representing the student ID.
-    attr_accessor :id
+    attr_reader :id
     # A string representing the student's surname.
     attr_accessor :surname
     # A string representing the student's git username.
-    attr_accessor :git
+    attr_reader :git
     
     def initialize(id, surname, git)
+        
+        validate_git
+        
         @id = id
         @surname = surname
         @git = git
@@ -32,6 +35,10 @@ class Student_super
     # In case the private init is needed
     # private_class_method :new
     
+    # MARK: Setters
+    def update_git(new_git):
+        validate_git
+        @git = new_git
     
     # Returns a string representation of the student in the format "ID: [id], Surname: [surname], Git: [git]".
     def to_s
@@ -47,7 +54,7 @@ class Student_super
     
     # Validate git
     def validate_git
-        if @git && !Student.is_valid_git?(@git)
+        if @git && !self.is_valid_git?(@git)
             raise ArgumentError, "Git in wrong format."
         end
     end
