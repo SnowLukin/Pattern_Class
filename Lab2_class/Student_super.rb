@@ -16,12 +16,22 @@
 
 # This class represents a student with an ID, surname, and git username.
 class Student_super
+    
     # A string representing the student ID.
     attr_reader :id
     # A string representing the student's surname.
     attr_accessor :surname
     # A string representing the student's git username.
     attr_reader :git
+    
+    # Git regex
+    # Git must be in the following format:
+    # - https://github.com
+    # - 1 or more characters
+    # - no spaces
+    # - no special characters
+    # - no dashes
+    VALID_GIT_REGEX = /\Ahttps:\/\/github\.com\/\w+\z/
     
     def initialize(id, surname, git)
         
@@ -36,7 +46,7 @@ class Student_super
     # private_class_method :new
     
     # MARK: Setters
-    def update_git(new_git):
+    def update_git(new_git)
         validate_git
         @git = new_git
     
