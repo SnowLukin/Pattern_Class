@@ -32,9 +32,14 @@ class Student_short < Student_super
   # surname - The student's surname.
   # git - The student's git username.
   # contact - The student's contact information.
-  def initialize(id, surname, git, contact)
+  def initialize(params = {id: '', surname: '', git: '', contact: ''})
     super(id, surname, git)
+    @id = params[:id]
+    @surname = params[:surname
+    @git = params[:git]
     @contact = contact
+    
+    validate_git
   end
 
   # Returns a string representation of the student in the format "ID: [id], Surname: [surname], Git: [git], Contact: [contact]".
