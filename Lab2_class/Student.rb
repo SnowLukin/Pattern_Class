@@ -50,7 +50,8 @@ require_relative 'Student_super'
 
 class Student < Student_super
     # Create getters and setters for all instance variables
-    attr_accessor :name, :middle_name, :phone, :telegram, :email
+    attr_accessor :name, :middle_name, :telegram
+    attr_reader :phone, :email
     
     # Email regex
     # Email address must be in the following format:
@@ -72,15 +73,6 @@ class Student < Student_super
     # - no parentheses
     # - no periods
     VALID_PHONE_REGEX = /\A\+?\d{10}\z/
-    
-    # Git regex
-    # Git must be in the following format:
-    # - https://github.com
-    # - 1 or more characters
-    # - no spaces
-    # - no special characters
-    # - no dashes
-    VALID_GIT_REGEX = /\Ahttps:\/\/github\.com\/\w+\z/
     
     # Init with any number of params
     def initialize(params = {})
@@ -159,19 +151,25 @@ class Student < Student_super
         end
     end
     
-    # Set contacts
-    def set_contacts(phone, telegram, email)
-        if phone && !Student.is_valid_phone?(phone)
+    # MARK: Setters
+    def set_phone_number(new_phone)
+        if new_phone && !self.is_valid_phone?(new_phone)
             raise ArgumentError, "Phone in wrong format."
         end
+        @phone = new_phone
         
-        if email && !Student.is_valid_email?(email)
+    def set_email(new_email)
+        if new_email && !self.is_valid_email?(new_email)
             raise ArgumentError, "Email in wrong format."
         end
-        
-        @phone = phone
-        @telegram = telegram
         @email = email
+    
+    # Set contacts
+    def set_contacts(phone, telegram, email)
+        set_phone_number(phone)
+        set_email(email)
+        
+        @telegram = telegram
     end
     
     # Short info about student
