@@ -75,8 +75,10 @@ class Student < Student_super
     VALID_PHONE_REGEX = /\A\+?\d{10}\z/
     
     # Init with any number of params
-    def initialize(params = {})
-        super.initialize(id: params[:id], surname: params[:surname], git: params[:git])
+    def initialize(params = { name: '', surname: '', middle_name: '' })
+        @id: params[:id]
+        @surname: params[:name]
+        @git: params[:git]
         @name = params[:name]
         @middle_name = params[:middle_name]
         
@@ -202,12 +204,12 @@ class Student < Student_super
     # MARK: - PRIVATE
     private
     # Validate that at least one contact is present and git is present
-    def validate
+    def validate?
         validate_git_presence && validate_contacts_presence
     end
     
     # Validate that at least one contact is present
-    def validate_contacts_presence
+    def validate_contacts_presence?
         return true if phone || telegram || email
         puts "At least one contact (phone, telegram, mail) is required"
         false

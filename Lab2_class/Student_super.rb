@@ -33,22 +33,22 @@ class Student_super
     # - no dashes
     VALID_GIT_REGEX = /\Ahttps:\/\/github\.com\/\w+\z/
     
-    def initialize(id, surname, git)
-        
-        validate_git
-        
-        @id = id
-        @surname = surname
-        @git = git
-    end
+#    def initialize(id, surname, git)
+#
+#        validate_git
+#
+#        @id = id
+#        @surname = surname
+#        @git = git
+#    end
     
     # In case the private init is needed
-    # private_class_method :new
+    private_class_method :new
     
     # MARK: Setters
     def update_git(new_git)
-        validate_git
         @git = new_git
+        validate_git
     
     # Returns a string representation of the student in the format "ID: [id], Surname: [surname], Git: [git]".
     def to_s
