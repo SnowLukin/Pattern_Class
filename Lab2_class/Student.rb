@@ -1,84 +1,18 @@
-#    +---------------------------------+
-#    |            Student              |
-#    +---------------------------------+
-#    | -id: int                        |
-#    | -surname: string                |
-#    | -name: string                   |
-#    | -middle_name: string            |
-#    | -phone: string                  |
-#    | -telegram: string               |
-#    | -email: string                  |
-#    | -git: string                    |
-#    | +VALID_EMAIL_REGEX: regex       |
-#    | +VALID_PHONE_REGEX: regex       |
-#    | +VALID_GIT_REGEX: regex         |
-#    +---------------------------------+
-#    | +new(params)                    |
-#    | +from_string(string): Student   |
-#    | +read_from_txt(file_path): Array|
-#    | +write_to_txt(file_path, students)|
-#    | +set_contacts(phone, telegram, email)|
-#    | +get_info: string               |
-#    | +get_name_info: string          |
-#    | +get_contact_info: string       |
-#    +---------------------------------+
-
-
-#    The Student class has the following attributes:
-#
-#    * id: an integer that represents the unique identifier of the student
-#    * surname: a string that represents the surname of the student
-#    * name: a string that represents the name of the student
-#    * middle_name: a string that represents the middle name of the student
-#    * phone: a string that represents the phone number of the student
-#    * telegram: a string that represents the Telegram account of the student
-#    * email: a string that represents the email address of the student
-#    * git: a string that represents the Git account of the student
-
-#    The Student class has the following methods:
-#
-#    * new(params): a constructor that initializes a new Student object with the given parameters.
-#    * from_string(string): a static method that creates a new Student object from a string.
-#    * read_from_txt(file_path): a static method that reads student data from a text file and returns an array of Student objects.
-#    * write_to_txt(file_path, students): a static method that writes student data to a text file.
-#    * set_contacts(phone, telegram, email): a method that sets the phone, telegram, and email attributes of the Student object.
-#    * get_info(): a method that returns a short string containing the name, Git account, and contact information of the Student object.
-#    * get_name_info(): a method that returns a short string containing the surname, name initial, and middle name initial of the Student object.
-#    * get_contact_info(): a method that returns a short string containing the phone, telegram, or email of the Student object.
-
 require_relative 'Student_super'
 
 class Student < Student_super
-    # Create getters and setters for all instance variables
+    
     attr_accessor :name, :middle_name, :telegram
     attr_reader :phone, :email
     
-    # Email regex
-    # Email address must be in the following format:
-    #  - 1 or more characters
-    # - @
-    # - 1 or more characters
-    # - .
-    # - 1 or more characters
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
-    
-    # Phone number regex
-    # Phone number must be in the following format:
-    # - one plus sign
-    # - 10 digits
-    # - no spaces
-    # - no letters
-    # - no special characters
-    # - no dashes
-    # - no parentheses
-    # - no periods
     VALID_PHONE_REGEX = /\A\+?\d{10}\z/
     
     # Init with any number of params
     def initialize(params = { name: '', surname: '', middle_name: '' })
-        @id: params[:id]
-        @surname: params[:name]
-        @git: params[:git]
+        @id = params[:id]
+        @surname = params[:name]
+        @git = params[:git]
         @name = params[:name]
         @middle_name = params[:middle_name]
         
@@ -88,7 +22,7 @@ class Student < Student_super
         raise ArgumentError, "Name, surname and middle_name are required" unless @name && @surname && @middle_name
         
         # Validate that at least one contact is present and git is present
-        if !validate
+        unless validate
             raise ArgumentError, "Git and at least one contact is req..."
         end
     end
@@ -115,11 +49,6 @@ class Student < Student_super
         new(params)
     end
     
-    # Reads student data from a text file and returns an array of Student objects.
-    #
-    # @param file_path [String] the path to the text file to be read
-    # @return [Array<Student>] an array of Student objects created from the data in the file
-    # @raise [RuntimeError] if the file cannot be found or there is an error while reading it
     def self.read_from_txt(file_path)
         students = []
         begin
@@ -136,11 +65,6 @@ class Student < Student_super
         end
     end
     
-    # Writes student data to a text file.
-    #
-    # @param file_path [String] the path to the text file to be written
-    # @param students [Array<Student>] an array of Student objects whose data will be written to the file
-    # @raise [RuntimeError] if there is an error while writing to the file
     def self.write_to_txt(file_path, students)
         begin
             File.open(file_path, 'w') do |file|
@@ -159,14 +83,15 @@ class Student < Student_super
             raise ArgumentError, "Phone in wrong format."
         end
         @phone = new_phone
-        
+    end
+    
     def set_email(new_email)
         if new_email && !self.is_valid_email?(new_email)
             raise ArgumentError, "Email in wrong format."
         end
         @email = email
+    end
     
-    # Set contacts
     def set_contacts(phone, telegram, email)
         set_phone_number(phone)
         set_email(email)
@@ -205,7 +130,7 @@ class Student < Student_super
     private
     # Validate that at least one contact is present and git is present
     def validate?
-        validate_git_presence && validate_contacts_presence
+        validate_git_presence? && validate_contacts_presence?
     end
     
     # Validate that at least one contact is present
