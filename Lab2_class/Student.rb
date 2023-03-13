@@ -2,6 +2,8 @@ require_relative 'Student_super'
 
 class Student < Student_super
     
+    public_class_method :new
+    
     attr_accessor :name, :middle_name, :telegram
     attr_reader :phone, :email
     
@@ -79,14 +81,14 @@ class Student < Student_super
     
     # MARK: Setters
     def set_phone_number(new_phone)
-        if new_phone && !self.is_valid_phone?(new_phone)
+        if new_phone && !Student.is_valid_phone?(new_phone)
             raise ArgumentError, "Phone in wrong format."
         end
         @phone = new_phone
     end
     
     def set_email(new_email)
-        if new_email && !self.is_valid_email?(new_email)
+        if new_email && !Student.is_valid_email?(new_email)
             raise ArgumentError, "Email in wrong format."
         end
         @email = email

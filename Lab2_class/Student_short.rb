@@ -1,6 +1,9 @@
 require_relative 'Student_super'
 
 class Student_short < Student_super
+    
+    public_class_method :new
+    
     protected
     attr_writer :contact
     

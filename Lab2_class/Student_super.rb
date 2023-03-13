@@ -14,7 +14,7 @@ class Student_super
     
     # Git regex
     # Git must be in the following format:
-    # - https://github.com
+    # - https://github.com/Name
     VALID_GIT_REGEX = /\Ahttps:\/\/github\.com\/\w+\z/
     
     # MARK: Setters
@@ -29,14 +29,14 @@ class Student_super
     end
     
     # Validate git
-    def self.is_valid_git?(git)
+    def Student_super.is_valid_git?(git)
         git =~ VALID_GIT_REGEX
     end
     
     protected
     # Validate git
     def validate_git
-        if @git && !self.is_valid_git?(@git)
+        if @git && !Student_super.is_valid_git?(@git)
             raise ArgumentError, "Git in wrong format."
         end
     end
