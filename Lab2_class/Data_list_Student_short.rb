@@ -2,8 +2,6 @@ require_relative 'Data_list'
 
 class Data_list_Student_short < Data_list
     
-    private_class_method :new
-    
     def set_data(new_data)
         @data = new_data
     end
