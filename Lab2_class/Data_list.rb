@@ -34,7 +34,4 @@ class Data_list
     def get_data
         raise NotImplementedError, "get_data must be implemented in inheriting class"
     end
-    
-    private
-    attr_reader data
 end
