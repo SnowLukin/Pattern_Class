@@ -24,6 +24,7 @@ end
 def test_data_list_student_short
     student = create_student_short
     data_list = Data_list_Student_short.new([student])
+    data_list.set_data([student])
     puts data_list.select(0)
     puts data_list.get_names.to_s
     puts data_list.get_data
