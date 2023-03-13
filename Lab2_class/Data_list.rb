@@ -36,5 +36,5 @@ class Data_list
     end
     
     private
-    attr_reader :data
+    attr_reader data
 end
