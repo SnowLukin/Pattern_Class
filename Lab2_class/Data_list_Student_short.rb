@@ -1,4 +1,5 @@
 require_relative 'Data_list'
+require_relative 'Data_table'
 
 class Data_list_Student_short < Data_list
     
@@ -15,8 +16,9 @@ class Data_list_Student_short < Data_list
     end
     
     def get_data
-        @data.each { |student|
-            [student.id, student.surname, student.git, student.contact]
-        }
+        Data_table.new([@data])
+#        @data.each { |student|
+#            [student.id, student.surname, student.git, student.contact]
+#        }
     end
 end

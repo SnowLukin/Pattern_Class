@@ -142,4 +142,3 @@ class Student < Student_super
         false
     end
 end
-
