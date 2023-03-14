@@ -9,7 +9,8 @@
    - [x] Student
    - [x] Student_short
    - [x] Student_super
-   - [ ] Data_list
-   - [ ] Data_table
-   - [ ] Data_list_Student_short
+   - [x] Data_list
+   - [x] Data_table
+   - [x] Data_list_Student_short
 
+<img width="700" alt="Lab2" src="Images/Lab2.png?raw=true">
