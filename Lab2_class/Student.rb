@@ -24,7 +24,7 @@ class Student < Student_super
         raise ArgumentError, "Name, surname and middle_name are required" unless @name && @surname && @middle_name
         
         # Validate that at least one contact is present and git is present
-        unless validate
+        unless validate?
             raise ArgumentError, "Git and at least one contact is req..."
         end
     end
