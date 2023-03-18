@@ -1,5 +1,9 @@
-class Data_table
+# frozen_string_literal: true
 
+class DataTable
+    
+    attr_reader :data
+    
     def initialize(data)
         @data = data
     end
