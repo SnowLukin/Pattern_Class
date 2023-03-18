@@ -13,5 +13,6 @@
    - [x] StudentListTxtManager
    - [ ] StudentListJSONManager
    - [ ] StudentListYALMManager
+   - [ ] Update uml diagram
 
 <img width="700" alt="Lab2" src="Images/Lab2.png?raw=true">
