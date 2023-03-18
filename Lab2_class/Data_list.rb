@@ -1,10 +1,18 @@
-class Data_list
+# frozen_string_literal: true
+
+require_relative 'data_table'
+
+class DataList
     
     attr_reader :selected
     
-    def initialize(data)
+    def initialize(data = [])
         @data = data
         @selected = []
+    end
+    
+    def set_data(new_data)
+        @data = new_data
     end
     
     def [](index)
@@ -27,11 +35,27 @@ class Data_list
         @selected
     end
     
-    def get_names
-        raise NotImplementedError, "get_names must be implemented in inheriting class"
+    def append(element)
+        @data.append element
+    end
+    
+    def remove_by(index)
+        @data.delete_at(index)
+    end
+    
+    def change_at(index, element)
+        @data[index] = element
     end
     
     def get_data
-        raise NotImplementedError, "get_data must be implemented in inheriting class"
+        @data.map.with_index do |element, index|
+            [index, *get_names[1..].map { |attr| element.instance_variable_get("@#{attr}") }]
+        end.then { |passing_data| DataTable.new(passing_data) }
     end
+    
+    
+    def get_names
+        @data[0].instance_variables.map { |var| var.to_s.sub('@', '') }
+    end
+    
 end
