@@ -11,7 +11,7 @@
    - [x] Data_table
    - [x] StudentList
    - [x] StudentListTxtManager
-   - [ ] StudentListJSONManager
+   - [x] StudentListJSONManager
    - [ ] StudentListYALMManager
    - [ ] Update uml diagram
 
