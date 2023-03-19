@@ -10,10 +10,9 @@ class StudentListJSONManager < StudentList
 
 	def initialize(file_path)
 		@file_path = file_path
-		@file_extension = '.json'
 	end
 
-	def load_data
+	def load_data(source = @file_path)
 		json_data = File.read(@file_path)
 		parsed_data = JSON.parse(json_data, symbolize_names: true)
 		students = parsed_data.map { |student_data| Student.new student_data }

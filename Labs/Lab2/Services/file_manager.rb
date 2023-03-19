@@ -1,5 +1,5 @@
 module FileManager
-	attr_accessor :file_path, :file_extension
+	attr_accessor :file_path
 
 	def load_data
 	end
