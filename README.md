@@ -12,7 +12,8 @@
    - [x] StudentList
    - [x] StudentListTxtManager
    - [x] StudentListJSONManager
-   - [ ] StudentListYALMManager
+   - [x] StudentListYALMManager
+   - [ ] Strategy pattern
    - [ ] Update uml diagram
 
 <img width="700" alt="Lab2" src="Images/Lab2.png?raw=true">

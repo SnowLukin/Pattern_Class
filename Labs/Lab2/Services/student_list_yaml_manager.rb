@@ -3,9 +3,9 @@
 require_relative '../StudentInfo/student_list'
 require_relative '../StudentInfo/student'
 require_relative 'file_manager'
+require 'yaml'
 
-class StudentListTxtManager < StudentList
-
+class StudentListYAMLManager < StudentList
 	include FileManager
 
 	def initialize(file_path)
@@ -13,14 +13,13 @@ class StudentListTxtManager < StudentList
 	end
 
 	def load_data(source = @file_path)
-		students = File.readlines(@file_path).map { |line| Student.from_string(line) }
-		set_data(students)
+		set_data YAML.load_file(@file_path)
 	rescue => e
 		raise "Exception: #{e.message}"
 	end
 
 	def save_data(destination = @file_path)
-		File.write(destination, @data.map { |student| student.to_s }.join("\n"))
+		File.open(destination, 'w') { |file| file.write(@data.to_yaml) }
 	rescue => e
 		raise "Exception: #{e.message}"
 	end
