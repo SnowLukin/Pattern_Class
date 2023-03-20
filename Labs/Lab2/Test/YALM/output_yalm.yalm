@@ -8,10 +8,10 @@
   contact_info: !ruby/object:ContactInfo
     phone: !ruby/object:PhoneContact
       value: "+1234567890"
-    telegram: !ruby/object:TelegramContact
-      value: ''
     email: !ruby/object:EmailContact
       value: Steve@email.ru
+    telegram: !ruby/object:TelegramContact
+      value: ''
 - !ruby/object:Student
   id: 1
   name: Steve
@@ -21,7 +21,7 @@
   contact_info: !ruby/object:ContactInfo
     phone: !ruby/object:PhoneContact
       value: "+1234567890"
-    telegram: !ruby/object:TelegramContact
-      value: "@snowlukin"
     email: !ruby/object:EmailContact
       value: ''
+    telegram: !ruby/object:TelegramContact
+      value: "@snowlukin"
