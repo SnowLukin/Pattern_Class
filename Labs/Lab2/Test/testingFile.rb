@@ -1,8 +1,8 @@
 require_relative '../StudentInfo/student'
 require_relative '../StudentInfo/student_list'
-require_relative '../Services/student_list_txt_manager'
-require_relative '../Services/student_list_json_manager'
-require_relative '../Services/student_list_yaml_manager'
+require_relative '../Services/StudentFileManagers/student_list_txt_manager'
+require_relative '../Services/StudentFileManagers/student_list_json_manager'
+require_relative '../Services/StudentFileManagers/student_list_yaml_manager'
 
 def create_students(number)
 	students = []
@@ -67,7 +67,7 @@ def main_test
 	test_student_list
     test_txt_file_manager
 	test_json_file_manager
+	test_yalm_file_manager
 end
 
-test_yalm_file_manager
-# main_test
+main_test
