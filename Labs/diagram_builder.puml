@@ -61,7 +61,6 @@ class StudentDisplay {
     + initials
     + git
     + contact
-    + validator: StudentDisplayValidator
     + initialize(student)
     + to_s: string
     + to_json
@@ -163,4 +162,6 @@ Student *-- StudentValidator
 DataList *-- DataTable
 StudentList *-- StudentFileManager
 StudentFileManager *-- FileStrategy
+StudentDisplay *-- Git
+StudentDisplay *-- ContactInfo
 @enduml
