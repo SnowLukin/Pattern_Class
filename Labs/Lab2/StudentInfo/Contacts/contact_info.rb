@@ -6,27 +6,16 @@ class ContactInfo
 	attr_accessor :phone, :telegram, :email
 
 	def initialize(**kwargs)
-		@phone = PhoneContact.new(kwargs[:phone]) if kwargs[:phone]
-		@telegram = TelegramContact.new(kwargs[:telegram]) if kwargs[:telegram]
-		@email = EmailContact.new(kwargs[:email]) if kwargs[:email]
-	end
-
-	def self.from_string(string)
-		phone_regex = /\A\+?\d{10}\z/
-		telegram_regex = /^@[A-Za-z0-9_]{5,32}$/
-		email_regex = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
-
-		values = string.split(',')
-
-		phone = values.find { |value| value.strip.match(phone_regex) } || ""
-		telegram = values.find { |value| value.strip.match(telegram_regex) } || ""
-		email = values.find { |value| value.strip.match(email_regex) } || ""
-
-		new({ phone: phone.strip, telegram: telegram.strip, email: email.strip })
+		@phone = PhoneContact.new(kwargs[:phone]) if kwargs[:phone] && kwargs[:phone] != ""
+		@telegram = TelegramContact.new(kwargs[:telegram]) if kwargs[:telegram] && kwargs[:telegram] != ""
+		@email = EmailContact.new(kwargs[:email]) if kwargs[:email] && kwargs[:email] != ""
 	end
 
 	def to_s
-		[phone, telegram, email].compact.join(', ')
+		phone_info = "phone: #{phone.to_s}" if @phone
+		email_info = "email: #{email.to_s}" if @email
+		telegram_info = "telegram: #{telegram.to_s}" if @telegram
+		[phone_info, email_info, telegram_info].compact.join(', ')
 	end
 
 	def to_json

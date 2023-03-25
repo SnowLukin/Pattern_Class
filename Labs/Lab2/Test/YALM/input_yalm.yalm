@@ -4,7 +4,8 @@
   name: Steve
   surname: Harvey
   middle_name: Biden
-  git: https://github.com/Steve
+  git: !ruby/object:Git
+    value: https://github.com/Steve
   contact_info: !ruby/object:ContactInfo
     phone: !ruby/object:PhoneContact
       value: "+1234567890"
@@ -17,7 +18,8 @@
   name: Steve
   surname: Harvey
   middle_name: Biden
-  git: https://github.com/Steve
+  git: !ruby/object:Git
+    value: https://github.com/Steve
   contact_info: !ruby/object:ContactInfo
     phone: !ruby/object:PhoneContact
       value: "+1234567890"

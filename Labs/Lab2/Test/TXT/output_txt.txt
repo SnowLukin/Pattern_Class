@@ -1,1 +1,1 @@
-10, Harvey, Steve, Biden, https://github.com/Steve, +1234567890, Steve@email.ru, 
+id: 10, initials: Harvey S.B., git: https://github.com/Steve, phone: +1234567890, email: Steve@email.ru

@@ -1,255 +1,166 @@
 @startuml
 
-!theme plain
-top to bottom direction
-skinparam linetype ortho
+left to right direction
+skinparam backgroundColor #1B2631
+skinparam class {
+  BackgroundColor #2E4053
+  BorderColor #1111111
+  ArrowColor #BDC3C7
+}
 
-class BasicObject {
-   initialize:
-   !:
-   !=:
-   ==:
-   __id__:
-   __send__:
-   instance_eval:
-   instance_exec:
-   method_missing:
-   singleton_method_added:
-   singleton_method_removed:
-   singleton_method_undefined:
-}
-class Class {
-   json_creatable?:
-}
 class Contact {
-   value:
-   initialize:
-   to_s:
-}
-class ContactInfo {
-   phone:
-   telegram:
-   email:
-   initialize:
-   from_string:
-   to_s:
-   to_json:
-   valid?:
-}
-class DataList {
-   data:
-   selected:
-   initialize:
-   set_data:
-   []:
-   size:
-   each:
-   select:
-   get_selected:
-   append:
-   remove_by:
-   change_at:
-   get_data:
-   get_names:
-}
-class DataTable {
-   data:
-   initialize:
-   []:
-   row_count:
-   column_count:
-   to_s:
-}
-class EmailContact {
-   value:
-   valid?:
-}
-class FileManager {
-   file_path:
-   load_data:
-   save_data:
-}
-class FileStrategy {
-   load:
-   save:
-}
-class FileStrategyJSON {
-   load:
-   save:
-}
-class FileStrategyTXT {
-   load:
-   save:
-}
-class FileStrategyYALM {
-   load:
-   save:
-}
-class Kernel {
-   pretty_inspect:
-   pp:
-}
-class Module {
-   constants:
-   nesting:
-   used_modules:
-   initialize:
-   <:
-   <=:
-   <=>:
-   ==:
-   ===:
-   >:
-   >=:
-   alias_method:
-   ancestors:
-   attr:
-   attr_accessor:
-   attr_reader:
-   attr_writer:
-   autoload:
-   autoload?:
-   class_variable_defined?:
-   class_variable_get:
-   class_variable_set:
-   class_variables:
-   const_defined?:
-   const_get:
-   const_missing:
-   const_set:
-   constants:
-   define_method:
-   deprecate_constant:
-   freeze:
-   include:
-   include?:
-   included_modules:
-   instance_method:
-   instance_methods:
-   method_defined?:
-   module_eval:
-   module_exec:
-   name:
-   prepend:
-   private_class_method:
-   private_constant:
-   private_instance_methods:
-   private_method_defined?:
-   protected_instance_methods:
-   protected_method_defined?:
-   public_class_method:
-   public_constant:
-   public_instance_method:
-   public_instance_methods:
-   public_method_defined?:
-   remove_class_variable:
-   remove_method:
-   singleton_class?:
-   to_s:
-   undef_method:
-   append_features:
-   extend_object:
-   included:
-   module_function:
-   prepend_features:
-   private:
-   protected:
-   public:
-   refine:
-   remove_const:
-   using:
-}
-class Object
-class PhoneContact {
-   value:
-   valid?:
-}
-class Student {
-   id:
-   name:
-   surname:
-   middle_name:
-   git:
-   contact_info:
-   initialize:
-   from_string:
-   to_s:
-   to_json:
-   short_form:
-   get_generic_info:
-   name_initials:
-   id=:
-   name=:
-   middle_name=:
-   surname=:
-   git=:
-   contact_info=:
-   validate:
-}
-class StudentFileManager {
-   file_path:
-   strategy:
-   data:
-   load_data:
-   save_data:
-}
-class StudentList {
-   selected:
-   data:
-   select:
-   sort_by_surname:
-   get_k_n_student_list:
-}
-class StudentListJSONManager {
-   file_path:
-   strategy:
-   initialize:
-}
-class StudentListTxtManager {
-   file_path:
-   strategy:
-   initialize:
-}
-class StudentListYAMLManager {
-   file_path:
-   strategy:
-   initialize:
-}
-class StudentValidator {
-   validate:
-   is_valid_git?:
-}
-class TelegramContact {
-   value:
-   valid?:
+    + initialize(value)
+    + to_s(): string
 }
 
-Class                   ^-[#000082,plain]-  Module
-Contact                 ^-[#000082,plain]-  Object
-ContactInfo             ^-[#000082,plain]-  Object
-DataList                ^-[#000082,plain]-  Object
-DataTable               ^-[#000082,plain]-  Object
-EmailContact            ^-[#000082,plain]-  Contact
-FileStrategyJSON        <-[#008200,dashed]-  FileStrategy
-FileStrategyJSON        ^-[#000082,plain]-  Object
-FileStrategyTXT         <-[#008200,dashed]-  FileStrategy
-FileStrategyTXT         ^-[#000082,plain]-  Object
-FileStrategyYALM        <-[#008200,dashed]-  FileStrategy
-FileStrategyYALM        ^-[#000082,plain]-  Object
-Module                  ^-[#000082,plain]-  Object
-Object                  ^-[#000082,plain]-  BasicObject
-Object                  <-[#008200,dashed]-  Kernel
-PhoneContact            ^-[#000082,plain]-  Contact
-Student                 ^-[#000082,plain]-  Object
-StudentFileManager      <-[#008200,dashed]-  FileManager
-StudentFileManager      ^-[#000082,plain]-  StudentList
-StudentList             ^-[#000082,plain]-  DataList
-StudentListJSONManager  <-[#008200,dashed]-  FileManager
-StudentListJSONManager  ^-[#000082,plain]-  StudentFileManager
-StudentListTxtManager   <-[#008200,dashed]-  FileManager
-StudentListTxtManager   ^-[#000082,plain]-  StudentFileManager
-StudentListYAMLManager  <-[#008200,dashed]-  FileManager
-StudentListYAMLManager  ^-[#000082,plain]-  StudentFileManager
-StudentValidator        ^-[#000082,plain]-  Object
-TelegramContact         ^-[#000082,plain]-  Contact
+class EmailContact extends Contact {
+    + valid?: boolean
+}
+
+class PhoneContact extends Contact {
+    + valid?: boolean
+}
+
+class TelegramContact extends Contact {
+    + valid?: boolean
+}
+
+class Git extends Contact {
+    + valid?: boolean
+    + to_json
+}
+
+class ContactInfo {
+    + phone: PhoneContact
+    + email: EmailContact
+    + telegram: TelegramContact
+    + initialize(**kwargs)
+    + valid?: boolean
+    + to_s: string
+    + to_json: string
+}
+
+class Student {
+    + id: string
+    + name: string
+    + middle_name: string
+    + surname: string
+    + git: Git
+    + contact_info: ContactInfo
+    - validator: StudentValidator
+    + initialize(**kwargs)
+    + name_initials: string
+    + get_generic_info: string
+    + short_form: string
+    + to_s: string
+    + to_json: string
+    + {static} from_string(string): Student
+}
+
+class StudentDisplay {
+    + initials
+    + git
+    + contact
+    + validator: StudentDisplayValidator
+    + initialize(student)
+    + to_s: string
+    + to_json
+}
+
+interface Validator {
+    + entity
+    + initialize(entity)
+    + validate
+}
+
+class StudentValidator implements Validator {
+    + validate
+    - valid_name?
+    + valid_git?
+    + valid_contact_info?
+}
+
+interface FileManager {
+    + load_data(source)
+    + save_data(destination, data)
+}
+
+class StudentFileManager implements FileManager {
+    - strategy: FileStrategy
+    + initialize(strategy)
+    + load_data(source)
+    + save_data(destination, data)
+    + configure_json()
+    + configure_txt()
+    + configure_yaml()
+}
+
+interface FileStrategy {
+    + load_data(source)
+    + save_data(destination, data)
+}
+
+class JsonFileStrategy implements FileStrategy {
+    + load_data(source)
+    + save_data(destination, data)
+}
+
+class TxtFileStrategy implements FileStrategy {
+    + load_data(source)
+    + save_data(destination, data)
+}
+
+class YamlFileStrategy implements FileStrategy {
+    + load_data(source)
+    + save_data(destination, data)
+}
+
+class DataTable {
+    - data
+    + initialize(data)
+    + [](row, col)
+    + row_count
+    + column_count
+    + to_s
+}
+
+class DataList {
+    # data
+    # selected
+    + initialize(data = [])
+    + set_data(new_data)
+    + [](index)
+    + size
+    + each
+    + select(number)
+    + get_selected
+    + reset_selected
+    + append(element)
+    + remove_by(index)
+    + delete_at(index, element)
+    + get_data: DataTable
+    + get_names: String
+}
+
+class StudentList extends DataList {
+    + file_manager: StudentFileManager
+    + initialize(data = [])
+    + select(number)
+    + sort_by_surname
+    + get_k_n_student_list(k, n, data_list = nil)
+    + load_data(file_path)
+    + save_data(file_path)
+    + get_data: DataTable
+    + get_names: String
+}
+
+ContactInfo *-- PhoneContact
+ContactInfo *-- EmailContact
+ContactInfo *-- TelegramContact
+Student *-- ContactInfo
+Student *-- Git
+Student *-- StudentValidator
+DataList *-- DataTable
+StudentList *-- StudentFileManager
+StudentFileManager *-- FileStrategy
 @enduml
