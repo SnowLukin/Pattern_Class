@@ -1,11 +1,9 @@
 module FileManager
-	attr_accessor :file_path
-	attr_reader :strategy
 
-	def load_data(source = @file_path)
+	def load_data(source)
 	end
 
-	def save_data(destination = @file_path)
+	def save_data(destination, data)
 	end
 end
 

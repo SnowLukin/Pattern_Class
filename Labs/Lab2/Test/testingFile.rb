@@ -1,20 +1,22 @@
 require_relative '../StudentInfo/student'
+require_relative '../StudentInfo/student_display'
 require_relative '../StudentInfo/student_list'
-require_relative '../Services/StudentFileManagers/student_list_txt_manager'
-require_relative '../Services/StudentFileManagers/student_list_json_manager'
-require_relative '../Services/StudentFileManagers/student_list_yaml_manager'
+
+def create_student(id)
+	Student.new(
+		id: id,
+		surname: 'Harvey',
+		name: 'Steve',
+		middle_name: 'Biden',
+		contact_info: { phone: '+1234567890', email: 'Steve@email.ru' },
+		git: 'https://github.com/Steve'
+	)
+end
 
 def create_students(number)
 	students = []
 	(1..number).each do |id|
-		students.append Student.new(
-			id: id,
-			surname: 'Harvey',
-			name: 'Steve',
-			middle_name: 'Biden',
-			contact_info: { phone: '+1234567890', email: 'Steve@email.ru' },
-			git: 'https://github.com/Steve'
-		)
+		students.append create_student(id)
 	end
 	students
 end
@@ -25,49 +27,44 @@ def print_students(students)
 	end
 end
 
-def test_student_list
-	student = Student.new(
-		id: 0,
-		surname: 'Harvey',
-		name: 'Steve',
-		middle_name: 'Biden',
-		contact_info: { phone: '+1234567890', email: 'Steve@email.ru' },
-		git: 'https://github.com/Steve'
-	)
+def test_student_list(student)
 	data_list = StudentList.new([student])
 	data_list.set_data([student])
 	puts data_list.select(0)
 	puts data_list.get_names.to_s
 	puts data_list.get_data.data.to_s
+	data_list
 end
 
-def test_txt_file_manager
-	student_txt = StudentListTxtManager.new("/Users/snowlukin/Desktop/University/Pattern_Class/Labs/Lab2/Test/TXT/input_txt.txt")
-	student_txt.load_data
-	puts student_txt.get_data.to_s
-	student_txt.save_data("/Users/snowlukin/Desktop/University/Pattern_Class/Labs/Lab2/Test/TXT/output_txt.txt")
+def test_txt_file_manager(student_list)
+	student_list.file_manager.configure_txt
+	student_list.load_data '/Users/snowlukin/Desktop/University/Pattern_Class/Labs/Lab2/Test/TXT/input_txt.txt'
+	puts student_list.get_data.to_s
+	student_list.save_data '/Users/snowlukin/Desktop/University/Pattern_Class/Labs/Lab2/Test/TXT/output_txt.txt'
 end
 
-def test_json_file_manager
-	student_json = StudentListJSONManager.new("/Users/snowlukin/Desktop/University/Pattern_Class/Labs/Lab2/Test/JSON/input_json.json")
-	student_json.load_data
-	puts student_json.get_data.to_s
-	student_json.save_data("/Users/snowlukin/Desktop/University/Pattern_Class/Labs/Lab2/Test/JSON/output_json.json")
+def test_json_file_manager(student_list)
+	student_list.file_manager.configure_json
+	student_list.load_data '/Users/snowlukin/Desktop/University/Pattern_Class/Labs/Lab2/Test/JSON/input_json.json'
+	puts student_list.get_data.to_s
+	student_list.save_data '/Users/snowlukin/Desktop/University/Pattern_Class/Labs/Lab2/Test/JSON/output_json.json'
 end
 
-def test_yalm_file_manager
-	student_yalm = StudentListYAMLManager.new "/Users/snowlukin/Desktop/University/Pattern_Class/Labs/Lab2/Test/YALM/input_yalm.yalm"
-	student_yalm.load_data
-	puts student_yalm.get_data.to_s
-	student_yalm.save_data("/Users/snowlukin/Desktop/University/Pattern_Class/Labs/Lab2/Test/YALM/output_yalm.yalm")
+def test_yaml_file_manager(student_list)
+	student_list.file_manager.configure_yaml
+	student_list.load_data '/Users/snowlukin/Desktop/University/Pattern_Class/Labs/Lab2/Test/YALM/input_yalm.yalm'
+	puts student_list.get_data.to_s
+	student_list.save_data '/Users/snowlukin/Desktop/University/Pattern_Class/Labs/Lab2/Test/YALM/output_yalm.yalm'
 end
 
 def main_test
 	print_students(create_students(3))
-	test_student_list
-    test_txt_file_manager
-	test_json_file_manager
-	test_yalm_file_manager
+	student = create_student(0)
+	student_display = StudentDisplay.new student
+	student_list = test_student_list student_display
+	test_txt_file_manager student_list
+	test_json_file_manager student_list
+	test_yaml_file_manager student_list
 end
 
 main_test

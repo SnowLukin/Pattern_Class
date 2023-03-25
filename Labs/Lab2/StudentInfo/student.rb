@@ -1,43 +1,42 @@
 # frozen_string_literal: true
 
-require_relative 'student_validator'
+require_relative 'Validators/student_validator'
 require_relative 'Contacts/contact_info'
 
 class Student
-	public
-
-	attr_reader :id, :name, :middle_name, :surname, :git, :contact_info
+	attr_accessor :id
+	attr_reader :name, :middle_name, :surname, :git, :contact_info, :validator
 
 	def initialize(**kwargs)
 		@id = kwargs[:id]
 		@name = kwargs[:name]
 		@surname = kwargs[:surname]
 		@middle_name = kwargs[:middle_name]
-		@git = kwargs[:git]
+		@git = Git.new(kwargs[:git]) if kwargs[:git]
+		@contact_info = ContactInfo.new(kwargs[:contact_info]) if kwargs[:contact_info]
 
-		if kwargs[:contact_info]
-			@contact_info = ContactInfo.new(kwargs[:contact_info])
-		else
-			@contact_info = ContactInfo.from_string kwargs[:contact_info_string]
-		end
-
-		validate
+		@validator = StudentValidator.new self
+		validator.validate
 	end
 
 	def self.from_string(string)
-		values = string.split(',')
+		hash = {}
+		string.split(", ").each do |pair|
+			key, value = pair.split(": ")
+			hash[key.to_sym] = value
+		end
 		Student.new(
-			id: values[0].strip,
-			name: values[1].strip,
-			surname: values[2].strip,
-			middle_name: values[3].strip,
-			git: values[4].strip,
-			contact_info_string: values[5...].join(", ")
+			id: hash[:id],
+			name: hash[:name],
+			surname: hash[:surname],
+			middle_name: hash[:middle_name],
+			git: hash[:git],
+			contact_info: {phone: hash[:phone], email: hash[:email], telegram: hash[:telegram]}
 		)
 	end
 
 	def to_s
-		"#{id}, #{name}, #{surname}, #{middle_name}, #{git}, #{contact_info.phone || ""}, #{contact_info.email || ""}, #{contact_info.telegram || ""}"
+		"#{id}, #{name}, #{surname}, #{middle_name}, #{git.to_s}, #{contact_info.to_s}"
 	end
 
 	def to_json
@@ -46,7 +45,7 @@ class Student
 			name: @name,
 			middle_name: @middle_name,
 			surname: @surname,
-			git: @git,
+			git: @git.to_json,
 			contact_info: @contact_info.to_json
 		}
 	end
@@ -65,40 +64,29 @@ class Student
 	end
 
 	# MARK: Setters
-	def id=(value)
-		@id = value
-		validate
-	end
-
 	def name=(value)
-		@name = value
-		validate
+		@name = value if value
 	end
 
 	def middle_name=(value)
-		@middle_name = value
-		validate
+		@middle_name = value if value
 	end
 
 	def surname=(value)
-		@surname = value
-		validate
+		@surname = value if value
 	end
 
 	def git=(value)
+		# TODO: Can be done better
+		old_git = @git
 		@git = value
-		validate
+		@git = old_git unless validator.valid_git?
 	end
 
 	def contact_info=(value)
+		# TODO: Can be done better
+		old_contact_info = @contact_info
 		@contact_info = value
-		validate
-	end
-
-	private
-
-	def validate
-		validator = StudentValidator.new
-		validator.validate(student: self)
+		@contact_info = old_contact_info unless validator.valid_contact_info?
 	end
 end

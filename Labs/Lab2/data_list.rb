@@ -35,6 +35,10 @@ class DataList
 		@selected
 	end
 
+	def reset_selected
+		@selected = []
+	end
+
 	def append(element)
 		@data.append element
 	end
@@ -43,7 +47,7 @@ class DataList
 		@data.delete_at(index)
 	end
 
-	def change_at(index, element)
+	def delete_at(index, element)
 		@data[index] = element
 	end
 

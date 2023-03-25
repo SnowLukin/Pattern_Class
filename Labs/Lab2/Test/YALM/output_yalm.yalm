@@ -1,24 +1,22 @@
 ---
-- !ruby/object:Student
+- !ruby/object:StudentDisplay
   id: 0
-  name: Steve
-  surname: Harvey
-  middle_name: Biden
-  git: https://github.com/Steve
-  contact_info: !ruby/object:ContactInfo
+  initials: Harvey S.B.
+  git: !ruby/object:Git
+    value: https://github.com/Steve
+  contact: !ruby/object:ContactInfo
     phone: !ruby/object:PhoneContact
       value: "+1234567890"
     email: !ruby/object:EmailContact
       value: Steve@email.ru
     telegram: !ruby/object:TelegramContact
       value: ''
-- !ruby/object:Student
+- !ruby/object:StudentDisplay
   id: 1
-  name: Steve
-  surname: Harvey
-  middle_name: Biden
-  git: https://github.com/Steve
-  contact_info: !ruby/object:ContactInfo
+  initials: Harvey S.B.
+  git: !ruby/object:Git
+    value: https://github.com/Steve
+  contact: !ruby/object:ContactInfo
     phone: !ruby/object:PhoneContact
       value: "+1234567890"
     email: !ruby/object:EmailContact
