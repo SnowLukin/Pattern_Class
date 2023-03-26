@@ -86,12 +86,9 @@ interface FileManager {
 
 class StudentFileManager implements FileManager {
     - strategy: FileStrategy
-    + initialize(strategy)
     + load_data(source)
     + save_data(destination, data)
-    + configure_json()
-    + configure_txt()
-    + configure_yaml()
+    - set_strategy_for(file_path)
 }
 
 interface FileStrategy {

@@ -37,24 +37,21 @@ def test_student_list(student)
 end
 
 def test_txt_file_manager(student_list)
-	student_list.file_manager.configure_txt
 	student_list.load_data '/Users/snowlukin/Desktop/University/Pattern_Class/Labs/Lab2/Test/TXT/input_txt.txt'
 	puts student_list.get_data.to_s
 	student_list.save_data '/Users/snowlukin/Desktop/University/Pattern_Class/Labs/Lab2/Test/TXT/output_txt.txt'
 end
 
 def test_json_file_manager(student_list)
-	student_list.file_manager.configure_json
 	student_list.load_data '/Users/snowlukin/Desktop/University/Pattern_Class/Labs/Lab2/Test/JSON/input_json.json'
 	puts student_list.get_data.to_s
 	student_list.save_data '/Users/snowlukin/Desktop/University/Pattern_Class/Labs/Lab2/Test/JSON/output_json.json'
 end
 
 def test_yaml_file_manager(student_list)
-	student_list.file_manager.configure_yaml
-	student_list.load_data '/Users/snowlukin/Desktop/University/Pattern_Class/Labs/Lab2/Test/YALM/input_yalm.yalm'
+	student_list.load_data '/Users/snowlukin/Desktop/University/Pattern_Class/Labs/Lab2/Test/YAML/input_yaml.yaml'
 	puts student_list.get_data.to_s
-	student_list.save_data '/Users/snowlukin/Desktop/University/Pattern_Class/Labs/Lab2/Test/YALM/output_yalm.yalm'
+	student_list.save_data '/Users/snowlukin/Desktop/University/Pattern_Class/Labs/Lab2/Test/YAML/output_yaml.yaml'
 end
 
 def main_test
