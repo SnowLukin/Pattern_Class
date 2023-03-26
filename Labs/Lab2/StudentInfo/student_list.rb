@@ -33,14 +33,13 @@ class StudentList < DataList
 	end
 
 	def get_k_n_student_list(k, n, data_list = nil)
-		return data_list if data_list != nil
-		filtered = @data.select { |student| student.id % n == 0 }
-		filtered[0...k].map { |student| student }
+		return data_list.get_k_n_student_list(k, n) if data_list != nil
+		part = size / k
+		@data[part * (n - 1)...part * n]
 	end
 
 	def load_data(file_path)
 		set_data @file_manager.load_data(file_path)
-		# @data = @file_manager.load_data(file_path)
 	end
 
 	def save_data(file_path)
