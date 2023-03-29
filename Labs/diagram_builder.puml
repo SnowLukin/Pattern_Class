@@ -156,7 +156,6 @@ ContactInfo *-- TelegramContact
 Student *-- ContactInfo
 Student *-- Git
 Student *-- StudentValidator
-DataList *-- DataTable
 StudentList *-- StudentFileManager
 StudentFileManager *-- FileStrategy
 StudentDisplay *-- Git
