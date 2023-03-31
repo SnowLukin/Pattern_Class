@@ -50,6 +50,17 @@ class Student
 		}
 	end
 
+	def self.from_record(student_record)
+		Student.new(
+			id: student_record.id,
+			name: student_record.name,
+			middle_name: student_record.middle_name,
+			surname: student_record.surname,
+			git: Git.new(student_record.git),
+			contact_info: ContactInfo.from_json(JSON.parse(student_record.contact_info))
+		)
+	end
+
 	def short_form
 		[id, name_initials, git, contact_info.to_s]
 	end
