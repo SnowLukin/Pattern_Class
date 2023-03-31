@@ -7,7 +7,7 @@ class Student
 	attr_accessor :id
 	attr_reader :name, :middle_name, :surname, :git, :contact_info, :validator
 
-	def initialize(**kwargs)
+	def initialize(kwargs)
 		@id = kwargs[:id]
 		@name = kwargs[:name]
 		@surname = kwargs[:surname]

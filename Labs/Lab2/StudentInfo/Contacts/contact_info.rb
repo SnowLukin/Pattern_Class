@@ -5,7 +5,7 @@ require_relative 'telegram_contact'
 class ContactInfo
 	attr_accessor :phone, :telegram, :email
 
-	def initialize(**kwargs)
+	def initialize(kwargs)
 		@phone = PhoneContact.new(kwargs[:phone]) if kwargs[:phone] && kwargs[:phone] != ""
 		@telegram = TelegramContact.new(kwargs[:telegram]) if kwargs[:telegram] && kwargs[:telegram] != ""
 		@email = EmailContact.new(kwargs[:email]) if kwargs[:email] && kwargs[:email] != ""
