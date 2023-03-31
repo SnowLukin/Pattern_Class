@@ -7,12 +7,13 @@ class Student
 	attr_accessor :id
 	attr_reader :name, :middle_name, :surname, :git, :contact_info, :validator
 
-	def initialize(**kwargs)
+	def initialize(kwargs)
 		@id = kwargs[:id]
 		@name = kwargs[:name]
 		@surname = kwargs[:surname]
 		@middle_name = kwargs[:middle_name]
 		@git = Git.new(kwargs[:git]) if kwargs[:git]
+		puts kwargs[:contact_info]
 		@contact_info = ContactInfo.new(kwargs[:contact_info]) if kwargs[:contact_info]
 
 		@validator = StudentValidator.new self
