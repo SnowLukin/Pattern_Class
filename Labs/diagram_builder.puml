@@ -6,31 +6,33 @@ skinparam class {
   BackgroundColor #2E4053
   BorderColor #1111111
   ArrowColor #BDC3C7
+  FontColor #BFFFFF
 }
 
-class Contact {
+class Contact << (C, #FFA500) >> {
+    + value: String
     + initialize(value)
     + to_s(): string
 }
 
-class EmailContact extends Contact {
+class EmailContact << (C, #FFA500) >> extends Contact {
     + valid?: boolean
 }
 
-class PhoneContact extends Contact {
+class PhoneContact << (C, #FFA500) >> extends Contact {
     + valid?: boolean
 }
 
-class TelegramContact extends Contact {
+class TelegramContact << (C, #FFA500) >> extends Contact {
     + valid?: boolean
 }
 
-class Git extends Contact {
+class Git << (C, #FFA500) >> extends Contact {
     + valid?: boolean
     + to_json
 }
 
-class ContactInfo {
+class ContactInfo << (C, #FFA500) >> {
     + phone: PhoneContact
     + email: EmailContact
     + telegram: TelegramContact
@@ -40,7 +42,7 @@ class ContactInfo {
     + to_json: string
 }
 
-class Student {
+class Student << (C, #FFA500) >> {
     + id: string
     + name: string
     + middle_name: string
@@ -57,7 +59,7 @@ class Student {
     + {static} from_string(string): Student
 }
 
-class StudentDisplay {
+class StudentDisplay << (C, #FFA500) >> {
     + initials
     + git
     + contact
@@ -72,7 +74,7 @@ interface Validator {
     + validate
 }
 
-class StudentValidator implements Validator {
+class StudentValidator << (C, #FFA500) >>  implements Validator {
     + validate
     - valid_name?
     + valid_git?
@@ -84,7 +86,7 @@ interface FileManager {
     + save_data(destination, data)
 }
 
-class StudentFileManager implements FileManager {
+class StudentFileManager << (C, #FFA500) >>  implements FileManager {
     - strategy: FileStrategy
     + load_data(source)
     + save_data(destination, data)
@@ -96,22 +98,22 @@ interface FileStrategy {
     + save_data(destination, data)
 }
 
-class JsonFileStrategy implements FileStrategy {
+class JsonFileStrategy << (C, #FFA500) >>  implements FileStrategy {
     + load_data(source)
     + save_data(destination, data)
 }
 
-class TxtFileStrategy implements FileStrategy {
+class TxtFileStrategy << (C, #FFA500) >>  implements FileStrategy {
     + load_data(source)
     + save_data(destination, data)
 }
 
-class YamlFileStrategy implements FileStrategy {
+class YamlFileStrategy << (C, #FFA500) >>  implements FileStrategy {
     + load_data(source)
     + save_data(destination, data)
 }
 
-class DataTable {
+class DataTable << (C, #FFA500) >>  {
     - data
     + initialize(data)
     + [](row, col)
@@ -120,7 +122,7 @@ class DataTable {
     + to_s
 }
 
-class DataList {
+class DataList << (C, #FFA500) >>  {
     # data
     # selected
     + initialize(data = [])
@@ -138,7 +140,7 @@ class DataList {
     + get_names: String
 }
 
-class StudentList extends DataList {
+class StudentList << (C, #FFA500) >>  extends DataList {
     + file_manager: StudentFileManager
     + initialize(data = [])
     + select(number)
