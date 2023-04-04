@@ -13,7 +13,6 @@ class Student
 		@surname = kwargs[:surname]
 		@middle_name = kwargs[:middle_name]
 		@git = Git.new(kwargs[:git]) if kwargs[:git]
-		puts kwargs[:contact_info]
 		@contact_info = ContactInfo.new(kwargs[:contact_info]) if kwargs[:contact_info]
 
 		@validator = StudentValidator.new self
