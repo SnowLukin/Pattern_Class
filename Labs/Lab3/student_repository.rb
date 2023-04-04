@@ -17,20 +17,20 @@ class StudentRepository
 	end
 
 	def create(student)
-		@manager.insert(name, student.to_data)
+		@manager.insert(StudentRepository.name, student.to_data)
 	end
 
 	def read(id)
-		result = @manager.select_record(name, id: id)
+		result = @manager.select_record(StudentRepository.name, id: id)
 		Student.from_record result.first if result.any?
 	end
 
 	def update(student)
-		@manager.update(name, student.id, student.to_data)
+		@manager.update(StudentRepository.name, student.id, student.to_data)
 	end
 
 	def delete(id)
-		@manager.delete(name, id)
+		@manager.delete(StudentRepository.name, id)
 	end
 
 	def get_display_list(record_count, page)
