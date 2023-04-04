@@ -6,7 +6,7 @@ require 'singleton'
 class APIManager
 
 	include Singleton
-
+	private_class_method :new
 	def initialize
 		@conn ||= PG.connect(
 			host: 'localhost',
