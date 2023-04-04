@@ -6,5 +6,6 @@ require_relative '../student_repository'
 
 api_manager = APIManager.new
 
-# Creating Students table if it doesnt exist yet
-StudentRepository.new api_manager
+student_repository = StudentRepository.new api_manager
+
+puts student_repository.get_display_list(2, 2)

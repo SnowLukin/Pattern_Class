@@ -50,14 +50,30 @@ class Student
 		}
 	end
 
-	def self.from_record(student_record)
+	def to_data
+		{
+			name: @name,
+			middle_name: @middle_name,
+			surname: @surname,
+			git: @git.to_s,
+			phone: @contact_info.phone.to_s,
+			telegram: @contact_info.telegram.to_s,
+			email: @contact_info.email.to_s
+		}
+	end
+
+	def self.from_record(record)
 		Student.new(
-			id: student_record.id,
-			name: student_record.name,
-			middle_name: student_record.middle_name,
-			surname: student_record.surname,
-			git: Git.new(student_record.git),
-			contact_info: ContactInfo.from_json(JSON.parse(student_record.contact_info))
+			id: record['id'],
+			name: record['name'],
+			middle_name: record['middle_name'],
+			surname: record['surname'],
+			git: record['git'],
+			contact_info: {
+				phone: record['phone'],
+				telegram: record['telegram'],
+				email: record['email']
+			}
 		)
 	end
 

@@ -1,46 +1,56 @@
 # frozen_string_literal: true
 
-require 'active_record'
 require_relative '../Lab2/StudentInfo/student'
-require 'student_record'
+require_relative '../Lab2/StudentInfo/student_display'
+require 'pg'
 
 class StudentRepository
 
-	def save(student)
-		StudentRecord.create(
-			id: student.id,
-			name: student.name,
-			surname: student.surname,
-			middle_name: student.middle_name,
-			git: student.git.to_s,
-			contact_info: student.contact_info.to_json
-		)
+	def self.name
+		'students'
 	end
 
-	def find(id)
-		record = StudentRecord.find(id)
-		record.to_student
+	def initialize(adapter)
+		@manager = adapter
+		# Create students table
+		adapter.create_table(StudentRepository.name, sql_values)
+	end
+
+	def create(student)
+		@manager.insert(name, student.to_data)
+	end
+
+	def read(id)
+		result = @manager.select_record(name, id: id)
+		Student.from_record result.first if result.any?
 	end
 
 	def update(student)
-		record = StudentRecord.find(student.id)
-
-		record.update(
-			name: student.name,
-			surname: student.surname,
-			middle_name: student.middle_name,
-			git: student.git.to_s,
-			contact_info: student.contact_info.to_json
-		)
+		@manager.update(name, student.id, student.to_data)
 	end
 
-	def delete(student)
-		record = StudentRecord.find(student.id)
-		record.destroy
+	def delete(id)
+		@manager.delete(name, id)
 	end
 
-	def all
-		StudentRecord.all.map(&:to_student)
+	def get_display_list(record_count, page)
+		data = @manager.get_list(StudentRepository.name, record_count, page)
+		students = []
+		data.map do |elem|
+			students.append Student.from_record elem
+		end
+		students
+	end
+
+	private
+	def sql_values
+		"id SERIAL PRIMARY KEY,
+		name VARCHAR(255),
+		middle_name VARCHAR(255),
+		surname VARCHAR(255),
+		git VARCHAR(255),
+		telegram VARCHAR(255),
+		email VARCHAR(255),
+		phone VARCHAR(255)"
 	end
 end
-

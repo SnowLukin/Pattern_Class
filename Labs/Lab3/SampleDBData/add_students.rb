@@ -1,24 +1,16 @@
 # frozen_string_literal: true
 
-require 'active_record'
+require 'pg'
+require_relative '../api_manager'
 require_relative '../student_repository'
-require_relative '../../Lab2/StudentInfo/student'
 
-# Configure database connection
-database_config = {
-	adapter: 'mysql2',
-	host: 'localhost',
-	username: 'root',
-	password: 'password',
-	database: 'mysql'
-}
+api_manager = APIManager.new
 
-# Connect to database
-ActiveRecord::Base.establish_connection(database_config)
+student_repository = StudentRepository.new api_manager
 
-def create_student(id)
+# Dummy student object
+def dummy_student
 	Student.new(
-		id: id,
 		surname: 'Harvey',
 		name: 'Steve',
 		middle_name: 'Biden',
@@ -27,22 +19,9 @@ def create_student(id)
 	)
 end
 
-student1 = create_student(0)
+# Create object and add it to the database
+student_repository.create dummy_student
 
-repo = StudentRepository.new
-
-repo.save(student1)
-
-found_student = repo.find(student1.id)
-puts found_student.to_s
-
-student1.name = "NewName"
-repo.update student1
-
-repo.all
-
-repo.delete student1
-
-repo.all
-
-
+# Select the student at id
+student = student_repository.read(6)
+puts student.to_s
