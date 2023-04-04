@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
 require 'pg'
+require 'singleton'
 
 class APIManager
+
+	include Singleton
 
 	def initialize
 		@conn ||= PG.connect(
