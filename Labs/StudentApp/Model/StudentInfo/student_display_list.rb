@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
-require_relative '../../a_list'
-require_relative 'student'
-require_relative 'student_display'
 require_relative '../data_table'
+require_relative '../data_list'
 
 class StudentDisplayList < DataList
 

@@ -39,18 +39,6 @@ class DataList
 		@selected = []
 	end
 
-	def append(element)
-		@data.append element
-	end
-
-	def remove_by(index)
-		@data.delete_at(index)
-	end
-
-	def delete_at(index, element)
-		@data[index] = element
-	end
-
 	def get_data
 		@data.map.with_index do |element, index|
 			[index, *get_names[1..].map { |attr| element.instance_variable_get("@#{attr}") }]

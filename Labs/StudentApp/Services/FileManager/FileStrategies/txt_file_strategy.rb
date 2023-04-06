@@ -21,11 +21,11 @@ class TXTFileStrategy
 		data
 	end
 
-	def save_data
+	def save_data(data)
 		return unless File.exist?(@file_path)
 
 		File.open(@file_path, 'w') do |file|
-			@data.each do |obj|
+			data.each do |obj|
 				file.puts obj.map { |k, v| "#{k}: #{v}" }.join(', ')
 			end
 		end

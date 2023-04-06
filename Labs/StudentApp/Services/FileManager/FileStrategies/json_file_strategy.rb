@@ -13,8 +13,8 @@ class JSONFileStrategy
 		JSON.parse(file, symbolize_names: true)
 	end
 
-	def save_data
+	def save_data(data)
 		return unless File.exist?(@file_path)
-		File.open(@file_path, 'w') { |file| file.write(JSON.pretty_generate(@data)) }
+		File.open(@file_path, 'w') { |file| file.write(JSON.pretty_generate(data)) }
 	end
 end

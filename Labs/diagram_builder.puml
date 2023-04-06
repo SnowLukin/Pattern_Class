@@ -81,36 +81,51 @@ class StudentValidator << (C, #FFA500) >>  implements Validator {
     + valid_contact_info?
 }
 
-interface FileManager {
-    + load_data(source)
-    + save_data(destination, data)
+interface FileManager implements DataManager {
+    + file_path { get }
+    - file_path { set }
+    + initialize(file_path)
+    + get_display_data(record_count, page)
+    + create(obj)
+    + read(id)
+    + update(index, obj)
+    + delete(index)
+    + count()
+    + read_all()
 }
 
 class StudentFileManager << (C, #FFA500) >>  implements FileManager {
+    + file_path { set }
     - strategy: FileStrategy
-    + load_data(source)
-    + save_data(destination, data)
+    + get_display_data(record_count, page)
+    + create(obj)
+    + read(id)
+    + update(index, obj)
+    + delete(index)
+    + count()
+    + read_all()
     - set_strategy_for(file_path)
 }
 
 interface FileStrategy {
-    + load_data(source)
-    + save_data(destination, data)
+    - file_path
+    + load_data()
+    + save_data(data)
 }
 
 class JsonFileStrategy << (C, #FFA500) >>  implements FileStrategy {
-    + load_data(source)
-    + save_data(destination, data)
+    + load_data()
+    + save_data(data)
 }
 
 class TxtFileStrategy << (C, #FFA500) >>  implements FileStrategy {
-    + load_data(source)
-    + save_data(destination, data)
+    + load_data()
+    + save_data(data)
 }
 
 class YamlFileStrategy << (C, #FFA500) >>  implements FileStrategy {
-    + load_data(source)
-    + save_data(destination, data)
+    + load_data()
+    + save_data(data)
 }
 
 class DataTable << (C, #FFA500) >>  {
@@ -133,23 +148,53 @@ class DataList << (C, #FFA500) >>  {
     + select(number)
     + get_selected
     + reset_selected
-    + append(element)
-    + remove_by(index)
-    + delete_at(index, element)
     + get_data: DataTable
     + get_names: String
 }
 
-class StudentList << (C, #FFA500) >>  extends DataList {
-    + file_manager: StudentFileManager
+class StudentDisplayList << (C, #FFA500) >>  extends DataList {
     + initialize(data = [])
     + select(number)
-    + sort_by_surname
-    + get_k_n_student_list(k, n, data_list = nil)
-    + load_data(file_path)
-    + save_data(file_path)
     + get_data: DataTable
     + get_names: String
+}
+
+class APIManager << (C, #FFA500) >> {
+    + instance: APIManager
+    - initialize()
+    + execute(query)
+    + insert(table, data)
+    + select_record(table, conditions)
+    + update(table, id, data)
+    + delete(table, id)
+    + select_all(table)
+    + count(table)
+    + create_table(name, values)
+    + get_list(table, record_count, page)
+}
+
+class StudentRepository << (C, #FFA500) >> implements DataManager {
+    {static} name: String
+    - manager: APIManager
+    + initialize(manager)
+    + create(student)
+    + read(id)
+    + update(student)
+    + delete(id)
+    + read_all()
+    + get_display_data(record_count, page)
+    + count()
+    - sql_values
+}
+
+interface DataManager {
+    + create(obj)
+    + read(id)
+    + update(obj)
+    + delete(id)
+    + read_all()
+    + get_display_data(record_count, page)
+    + count()
 }
 
 ContactInfo *-- PhoneContact
@@ -158,8 +203,8 @@ ContactInfo *-- TelegramContact
 Student *-- ContactInfo
 Student *-- Git
 Student *-- StudentValidator
-StudentList *-- StudentFileManager
 StudentFileManager *-- FileStrategy
 StudentDisplay *-- Git
 StudentDisplay *-- ContactInfo
+StudentRepository *-- APIManager
 @enduml

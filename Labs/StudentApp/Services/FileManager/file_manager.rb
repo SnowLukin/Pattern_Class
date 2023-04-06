@@ -1,10 +1,10 @@
 
-require_relative '/FileStrategies/txt_file_strategy'
-require_relative '/FileStrategies/json_file_strategy'
-require_relative '/FileStrategies/yaml_file_strategy'
 require_relative '../data_manager'
+require_relative '../../Model/data_list'
 
 module FileManager
+
+	include DataManager
 
 	attr_reader :file_path
 
@@ -12,23 +12,29 @@ module FileManager
 		@file_path = file_path
 	end
 
-	def file_path=(value)
-		@file_path = value
-		set_strategy
+	def get_display_list(record_count, page, data_list = nil)
 	end
 
-	private
-	def set_strategy
-		case File.extname(@file_path)
-		when '.txt'
-			@strategy = TXTFileStrategy.new @file_path
-		when '.json'
-			@strategy = JSONFileStrategy.new @file_path
-		when '.yaml'
-			@strategy = YAMLFileStrategy.new @file_path
-		else
-			raise "Unknown file type"
-		end
+	def create(obj)
 	end
+
+	def read(id)
+	end
+
+	def update(index, obj)
+	end
+
+	def delete(index)
+	end
+
+	def count
+	end
+
+	def read_all
+	end
+
+	# def sort(symbol) # :surname for student
+	# 	@data.sort_by! { |obj| obj[symbol] }
+	# end
 end
 

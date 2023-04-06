@@ -11,8 +11,8 @@ class YAMLFileStrategy
 		YAML.load_file(@file_path)
 	end
 
-	def save_data
+	def save_data(data)
 		return unless File.exist?(@file_path)
-		File.open(@file_path, 'w') { |file| file.write(YAML.dump(@data)) }
+		File.open(@file_path, 'w') { |file| file.write(YAML.dump(data)) }
 	end
 end
