@@ -8,3 +8,4 @@
 
 - [ ] Lab3
    - [x] Task 1 
+   - [x] Task 2
