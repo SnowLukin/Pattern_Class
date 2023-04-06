@@ -27,7 +27,7 @@ class DataList
 		@data.each { |element| yield element }
 	end
 
-	def select(number)
+	def select_obj(number)
 		@selected << number
 	end
 
@@ -37,18 +37,6 @@ class DataList
 
 	def reset_selected
 		@selected = []
-	end
-
-	def append(element)
-		@data.append element
-	end
-
-	def remove_by(index)
-		@data.delete_at(index)
-	end
-
-	def delete_at(index, element)
-		@data[index] = element
 	end
 
 	def get_data

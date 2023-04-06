@@ -1,19 +1,22 @@
 # frozen_string_literal: true
 
-require_relative '../Lab2/StudentInfo/student'
-require_relative '../Lab2/StudentInfo/student_display'
 require 'pg'
+require_relative '../../Model/StudentInfo/student_display'
+require_relative '../../Model/StudentInfo/student'
+require_relative '../data_manager'
 
 class StudentRepository
+
+	include DataManager
 
 	def self.name
 		'students'
 	end
 
-	def initialize(adapter)
-		@manager = adapter
+	def initialize(manager)
+		@manager = manager
 		# Create students table
-		adapter.create_table(StudentRepository.name, sql_values)
+		@manager.create_table(StudentRepository.name, sql_values)
 	end
 
 	def create(student)
@@ -33,13 +36,18 @@ class StudentRepository
 		@manager.delete(StudentRepository.name, id)
 	end
 
+	def read_all
+		data = @manager.select_all StudentRepository.name
+		data.map { |elem| Student.from_record elem }
+	end
+
 	def get_display_list(record_count, page)
 		data = @manager.get_list(StudentRepository.name, record_count, page)
-		students = []
-		data.map do |elem|
-			students.append Student.from_record elem
-		end
-		students
+		data.map { |elem| Student.from_record elem }
+	end
+
+	def count
+		@manager.count StudentRepository.name
 	end
 
 	private

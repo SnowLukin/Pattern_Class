@@ -57,6 +57,6 @@ class APIManager
 	end
 
 	def get_list(table, records_count, page)
-		records = execute "select * from #{table} limit #{records_count} offset #{page}"
+		execute "select * from #{table} limit #{records_count} offset #{page}"
 	end
 end
