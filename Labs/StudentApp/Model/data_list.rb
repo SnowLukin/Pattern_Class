@@ -27,7 +27,7 @@ class DataList
 		@data.each { |element| yield element }
 	end
 
-	def select(number)
+	def select_obj(number)
 		@selected << number
 	end
 

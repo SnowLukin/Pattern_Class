@@ -1,6 +1,6 @@
-require_relative '../StudentInfo/student'
+require_relative '../StudentInfo/p/StudentInfo/student'
 require_relative '../StudentInfo/student_display'
-require_relative '../StudentInfo/student_list'
+require_relative '../StudentInfo/student_display_list'
 
 def create_student(id)
 	Student.new(
@@ -28,7 +28,7 @@ def print_students(students)
 end
 
 def test_student_list(student)
-	data_list = StudentList.new([student])
+	data_list = StudentDisplayList.new([student])
 	data_list.set_data([student])
 	puts data_list.select(0)
 	puts data_list.get_names.to_s
@@ -37,21 +37,21 @@ def test_student_list(student)
 end
 
 def test_txt_file_manager(student_list)
-	student_list.load_data '/Users/snowlukin/Desktop/University/Pattern_Class/Labs/Lab2/Test/TXT/input_txt.txt'
+	student_list.load_data '/Users/snowlukin/Desktop/University/Pattern_Class/Labs/StudentApp/Test/TXT/input_txt.txt'
 	puts student_list.get_data.to_s
-	student_list.save_data '/Users/snowlukin/Desktop/University/Pattern_Class/Labs/Lab2/Test/TXT/output_txt.txt'
+	student_list.save_data '/Users/snowlukin/Desktop/University/Pattern_Class/Labs/StudentApp/Test/TXT/output_txt.txt'
 end
 
 def test_json_file_manager(student_list)
-	student_list.load_data '/Users/snowlukin/Desktop/University/Pattern_Class/Labs/Lab2/Test/JSON/input_json.json'
+	student_list.load_data '/Users/snowlukin/Desktop/University/Pattern_Class/Labs/StudentApp/Test/JSON/input_json.json'
 	puts student_list.get_data.to_s
-	student_list.save_data '/Users/snowlukin/Desktop/University/Pattern_Class/Labs/Lab2/Test/JSON/output_json.json'
+	student_list.save_data '/Users/snowlukin/Desktop/University/Pattern_Class/Labs/StudentApp/Test/JSON/output_json.json'
 end
 
 def test_yaml_file_manager(student_list)
-	student_list.load_data '/Users/snowlukin/Desktop/University/Pattern_Class/Labs/Lab2/Test/YAML/input_yaml.yaml'
+	student_list.load_data '/Users/snowlukin/Desktop/University/Pattern_Class/Labs/StudentApp/Test/YAML/input_yaml.yaml'
 	puts student_list.get_data.to_s
-	student_list.save_data '/Users/snowlukin/Desktop/University/Pattern_Class/Labs/Lab2/Test/YAML/output_yaml.yaml'
+	student_list.save_data '/Users/snowlukin/Desktop/University/Pattern_Class/Labs/StudentApp/Test/YAML/output_yaml.yaml'
 end
 
 def main_test

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 require 'pg'
-require_relative '../api_manager'
-require_relative '../student_repository'
+require_relative '../../StudentApp/Services/APIManager/api_manager'
+require_relative '../../StudentApp/Services/APIManager/student_repository'
 
 api_manager = APIManager.instance
 
