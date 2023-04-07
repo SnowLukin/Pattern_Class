@@ -7,8 +7,6 @@ class Git < Contact
 	end
 
 	def to_json
-		{
-			git: @value || ""
-		}
+		@value || ""
 	end
 end

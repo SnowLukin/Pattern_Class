@@ -45,7 +45,7 @@ class Student
 			name: @name,
 			middle_name: @middle_name,
 			surname: @surname,
-			git: @git.to_json,
+			git: @git.to_s,
 			contact_info: @contact_info.to_json
 		}
 	end

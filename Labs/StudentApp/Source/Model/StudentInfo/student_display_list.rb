@@ -11,7 +11,8 @@ class StudentDisplayList < DataList
 
 	def get_data
 		@data.map.with_index do |element, index|
-			[index, *%w[initials git contact].map { |attr| element.instance_variable_get("@#{attr}").to_s }]
+			[index, element.initials, element.git.to_s, element.single_contact]
+			# [index, *%w[initials git single_contact].map { |attr| element.instance_variable_get("@#{attr}").to_s }]
 		end.then { |passing_data| DataTable.new(passing_data) }
 	end
 

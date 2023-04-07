@@ -16,13 +16,23 @@ class StudentDisplay
 		"id: #{@id}, initials: #{@initials}, git: #{@git}, #{@contact.to_s}"
 	end
 
+	def single_contact
+		return @contact.phone.to_s if @contact.phone
+		return @contact.telegram.to_s if @contact.telegram
+		@contact.email.to_s if @contact.email
+	end
+
 	def to_json
 		{
 			id: @id,
 			initials: @initials,
-			git: @git.to_json,
+			git: @git.to_s,
 			contact: @contact.to_json
 		}
+	end
+
+	def initials=
+		# code here
 	end
 
 end
