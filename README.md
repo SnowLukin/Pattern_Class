@@ -6,6 +6,7 @@
 - [ ] Lab3
    - [x] Task 1 
    - [x] Task 2
+   - [x] Task 3
 
 <img width="800" alt="Lab2" src="Images/Diagram.png?raw=true">
 
