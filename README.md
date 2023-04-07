@@ -8,3 +8,5 @@
    - [x] Task 2
 
 <img width="800" alt="Lab2" src="Images/Diagram.png?raw=true">
+
+<img width="800" alt="Lab2" src="Images/StudentAppImage.png?raw=true">
