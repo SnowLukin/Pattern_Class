@@ -56,9 +56,7 @@ class TestStudent < MiniTest::Test
 			name: 'Steve',
 			middle_name: 'Biden',
 			surname: 'Harvey',
-			git: {
-				git: "https://github.com/Steve"
-			},
+			git: "https://github.com/Steve",
 			contact_info: { phone: '+1234567890', email: 'Steve@email.ru', telegram: '' }
 		}
 

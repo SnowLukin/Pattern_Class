@@ -42,7 +42,7 @@ class TestStudentFileManager < Minitest::Test
 			assert_equal(student_for_update.name, file_manager.read(0).name)
 		end
 
-		file_path = '/Users/snowlukin/Desktop/University/Pattern_Class/Labs/StudentApp/UnitTests/TestFiles/Mock.'
+		file_path = '/Users/snowlukin/Desktop/University/Pattern_Class/StudentApp/UnitTests/TestFiles/Mock.'
 		json_file_path = file_path + 'json'
 		yaml_file_path = file_path + 'yaml'
 		txt_file_path = file_path + 'txt'

@@ -30,6 +30,6 @@ class TestStudentDisplayList < Minitest::Test
 			[2, "Harvey S.B.", "https://github.com/Steve", "+1234567890"]
 		]
 
-		assert_equal expected, list
+		assert_equal expected, list.get_data.data
 	end
 end
