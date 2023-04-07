@@ -15,26 +15,6 @@ class StudentDisplayListController
 			@student_file_manager = StudentFileManager.new(file_path)
 		else
 			@student_file_manager = StudentRepository.new APIManager.instance
-			def create_student(id)
-				Student.new(
-					id: id,
-					surname: 'Harvey',
-					name: 'Steve',
-					middle_name: 'Biden',
-					contact_info: { phone: '+1234567890', email: 'Steve@email.ru' },
-					git: 'https://github.com/Steve'
-				)
-			end
-			st1 = create_student 0
-			st2 = create_student 1
-			st3 = create_student 2
-			st4 = create_student 3
-			st5 = create_student 4
-			@student_file_manager.create st1
-			@student_file_manager.create st2
-			@student_file_manager.create st3
-			@student_file_manager.create st4
-			@student_file_manager.create st5
 		end
 		@student_display_list = StudentDisplayList.new
 		load_student_data

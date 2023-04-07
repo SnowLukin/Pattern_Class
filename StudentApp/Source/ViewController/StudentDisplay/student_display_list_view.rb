@@ -84,7 +84,24 @@ class StudentDisplayListView
 							table_editable: true,
 							per_page: 20,
 							visible_page_count: true, # page count can be hidden if preferred
+
 						)
+
+						button('Add Student') {
+							stretchy false
+						}
+
+						button('Read Student') {
+							stretchy false
+						}
+
+						button('Update Student') {
+							stretchy false
+						}
+
+						button('Delete Student') {
+							stretchy false
+						}
 					}
 				}
 
