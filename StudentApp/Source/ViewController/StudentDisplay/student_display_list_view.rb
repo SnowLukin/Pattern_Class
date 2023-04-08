@@ -23,15 +23,12 @@ class StudentDisplayListView
 			tab {
 				tab_item('Students') {
 					vertical_box {
-
 						horizontal_box {
+							stretchy false
 							label {
 								text 'Git:'
 							}
-
-							stretchy false
 							combobox {
-								stretchy false
 								items @git_options
 								selected @git_options.index('Doesnt matter')
 							}
@@ -40,39 +37,32 @@ class StudentDisplayListView
 							label {
 								text 'Mail:'
 							}
-
-							stretchy false
 							combobox {
-								stretchy false
 								items @mail_options
 								selected @mail_options.index('Doesnt matter')
 							}
+							stretchy false
 						}
 						horizontal_box {
+							stretchy false
 							label {
 								text 'Contact:'
 							}
-
-							stretchy false
 							combobox {
-								stretchy false
 								items @contact_options
 								selected @contact_options.index('Doesnt matter')
 							}
 						}
 						horizontal_box {
+							stretchy false
 							label {
 								text 'Telegram:'
 							}
-
-							stretchy false
 							combobox {
-								stretchy false
 								items @telegram_options
 								selected @telegram_options.index('Doesnt matter')
 							}
 						}
-
 						refined_table(
 							model_array: @controller.student_display_list.get_data.data,
 							table_columns: {
@@ -91,17 +81,21 @@ class StudentDisplayListView
 							stretchy false
 						}
 
-						button('Read Student') {
+						@read_button = button('Read Student') {
 							stretchy false
 						}
 
-						button('Update Student') {
+						@update_button = button('Update Student') {
 							stretchy false
 						}
 
-						button('Delete Student') {
+						@delete_button = button('Delete Student') {
 							stretchy false
 						}
+
+						@read_button.disable
+						@update_button.disable
+						@delete_button.disable
 					}
 				}
 
